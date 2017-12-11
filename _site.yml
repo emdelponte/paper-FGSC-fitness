@@ -25,7 +25,7 @@ navbar:
   - text: Data
     icon: fa fa-table
     href: data.html
-  - text: Codes
+  - text: R Code
     icon: fa fa-file-code-o
     href: code.html
   - text: Manuscript
@@ -34,5 +34,5 @@ navbar:
   right:
   - text: source
     icon: fa-github-square
-    href: https://github.com/emdelponte/research-compendium-website
+    href: https://github.com/phytopathology/paper-FGSC-fitness
 

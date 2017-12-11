@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300');
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 
+
 body {
 font-family: 'Roboto Condensed', sans-serif;
 margin-left:2px;
@@ -33,18 +34,18 @@ h1, h2, h3,h4 {
   font-family: 'Oswald', sans-serif;
   padding-bottom: 10px;
   padding-top: 20px;
-  color: #339966;
+  color: #0AA460;
  
 } 
  
 .navbar-default {
-    background-color: #339966
+    background-color: #0AA460;
 
 }
 .list-group-item.active {
     z-index: 2;
     color: #ffffff;
-    background-color: #339966;
-    border-color: #339966
+    background-color: #0AA460;
+    border-color: #0AA460
 }
 

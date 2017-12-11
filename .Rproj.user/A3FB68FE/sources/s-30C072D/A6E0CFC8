@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "419169585",
+    "hash" : "0",
     "id" : "A6E0CFC8",
     "lastKnownWriteTime" : 1513016639,
     "last_content_update" : 1513016639638,
     "path" : "~/Documents/github/paper-FGSC-fitness/manuscript.Rmd",
     "project_path" : "manuscript.Rmd",
     "properties" : {
-        "cursorPosition" : "3,18",
-        "scrollLine" : "1"
+        "cursorPosition" : "12,30",
+        "scrollLine" : "0"
     },
     "relative_order" : 3,
     "source_on_save" : false,
