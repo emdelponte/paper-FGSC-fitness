@@ -321,9 +321,9 @@ div.tocify {
 
 <div id="raw-data" class="section level2">
 <h2>Raw data</h2>
-<p>The data were obtained from five different, mostly repeated experiments, and were organized in a single <code>xlsx</code> file. Data from each experiment are in a separate sheet, which are loaded separately using the <code>read_excel</code> function of the <code>readxl</code> file.</p>
-<p><code>I found much more convenient to use this binary file instead of storing in a text file like csv. For some variabeles, I had to deal with some characters which were not loading correctly when using</code>csv<code>files.</code></p>
-<p>Most of the data are already organized in the long format, but some are in the wide, and so will need some transformation. These are done within the respective section of the data analysis page.</p>
+<p>The data were obtained from five different (mostly repeated in time) experiments, and were organized in a single <code>xlsx</code> file. Data from each experiment are in a separate sheet, which are loaded separately by specifying the respective sheet name using the <code>read_excel</code> function of the <code>readxl</code> file.</p>
+<p><strong>NOTE:</strong> Although text files are prefered to store the data, I found more convenient to use a binary file instead of storing in a text file like csv. For some variabeles, I had to deal with some characters which were not loading correctly when using <code>csv</code> files. To visualize the data, go to the respective section of the data analysis page.</p>
+<p>Most of the data are already organized in a rectangular (tidy) format, mostly in the long-format (a raw is an observation), but some are in the wide (observations in multiple colums), and so will need some wrangling. This munging is done within the respective section of the data analysis page, after data import.</p>
 </div>
 <div id="download" class="section level2">
 <h2>Download</h2>

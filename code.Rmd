@@ -1,8 +1,8 @@
 % Code
 
-## General approach
+## Introduction
 
-The data com from a series of different experiments. There is one single `xlsx` file with each experiment in a single sheet. A single `csv` file was created from exporting each of those sheets. We will conduct the analysis separated for each experiment. Follows the commented code used for these analyses separated per experiment.
+The data com from a series of different experiments. There is one single `xlsx` file with each experiment in a single sheet. Follows the commented code used for these analyses separated per experiment.
 
 ## Load packages
 
@@ -36,7 +36,7 @@ perithecia
 
 ### Transform
 
-The data were prepared in the wide format where each score for percent perithecia coverage (0 -3) is in a separate colum. Let's transform this dataframe from the wide to the long format using `gather` function of `dplyr`. We need to create a column for the variable name and another for the score. 
+The data were prepared in the wide format where each score for percent perithecia coverage (0 -3) is in a separate column. Let's transform this dataframe from the wide to the long format using `gather` function of `dplyr`. We need to create a column for the variable name and another for the score. 
 
 ```{r}
 perithecia2 <- perithecia %>%
@@ -48,7 +48,7 @@ perithecia2
 
 ### Visualize
 
-Let's have a look at the frequency of the scores for each species-genotype separated for each substrate. This is a good plot to show in the paper. 
+Let's visualize the frequency of the scores for each species-genotype separated for each substrate. This is a nice plot to show in the paper!
 
 
 ```{r}
@@ -65,7 +65,7 @@ g1
 
 ### Model
 
-Since we have one species which has two genotypes, it may be important, besides testing the effect of species or genotype in the model, to create a species*genotype interaction variable and fit a mixed model to test the effect of this variable on the perithecial production index (ppi), so that the two genotypes of one species can be compared.
+Since we have one species which has two genotypes, it may be important, besides testing the effect of species or genotype in the model, to create a species*genotype interaction variable and fit a mixed model to test the effect of this variable on the perithecial production index (ppi). This way the two genotypes within one species can be compared between them and with the others.
 
 ```{r}
 # creating the variable
