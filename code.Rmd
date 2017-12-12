@@ -8,6 +8,7 @@ The data com from a series of different experiments. There is one single `xlsx` 
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 library(tidyverse)
+library(here)
 library(readxl)
 library(viridis)
 library(ggthemes)
@@ -27,13 +28,14 @@ library(influence.ME)
 Let's first import the data and have a look at the raw data.
 
 ```{r message=FALSE, warning=FALSE}
-perithecia <- read_csv("./data/perithecia.csv") %>%
+perithecia <- read_excel(here("data", "all-data.xlsx"), "perithecia") %>%
   filter(genotype != "t")
 
 perithecia
 ```
 
 ### Transform
+
 The data were prepared in the wide format where each score for percent perithecia coverage (0 -3) is in a separate colum. Let's transform this dataframe from the wide to the long format using `gather` function of `dplyr`. We need to create a column for the variable name and another for the score. 
 
 ```{r}
@@ -143,7 +145,8 @@ Finally, we prepare and save the Figure 1 of the manuscript which is a combo fig
 
 ```{r message=FALSE, warning=FALSE}
 grid1 <- plot_grid(g1, g2, labels = c("A", "B"), align = "hv", ncol = 1)
-ggsave("figs/grid1.png", grid1, width = 6, height = 6)
+ggsave(here("figs", "figure1.png"), grid1, width = 6, height = 6)
+grid1
 ```
  
 ## Mycelial growth
@@ -154,7 +157,7 @@ There is one `xlsx` file with data from a single experiment. We will use `read_e
 
 ```{r message=FALSE, warning=FALSE}
 Sys.setlocale("LC_ALL", "pt_BR.UTF-8")
-mgr <- read_excel("./data/mycelia.xlsx")
+mgr <- read_excel(here("data", "all-data.xlsx"), "mycelia") 
 
 head(mgr)
 ```
@@ -224,7 +227,7 @@ In this experiment, the production of macroconidia and further germination of 20
 ### Import 
 
 ```{r message=FALSE, warning=FALSE}
-spor <- read_csv("./data/spor.csv")
+spor <- read_excel(here("data", "all-data.xlsx"), "spor_germ") 
 
 # again, we create the species_genotype variable
 spor <- spor %>%
@@ -290,13 +293,13 @@ med <- data.frame(med)
 med
 ```
 
-### Figure
+### Figure 3
 
 ```{r message=FALSE, warning=FALSE}
 grid1 <- plot_grid(spor2, germ, labels = c("B", "C"), ncol = 2, align = "hv")
 
 grid5 <- plot_grid(mgr1, grid1, labels = c("A"), rel_heights = c(1, 1), ncol = 1, align = "hv")
-ggsave("figs/mgr_spor_germ.png", grid5, width = 5, height = 5)
+ggsave(here("figs", "figure3.png"), grid5, width = 5, height = 5)
 
 grid5
 ```
@@ -306,10 +309,8 @@ grid5
 ### Import 
 
 
-
 ```{r message=FALSE, warning=FALSE}
-pathogen <- read_csv("./data/pathogenicity.csv")
-pathogen <- pathogen %>%
+pathogen <- read_excel(here("data", "all-data.xlsx"), "pathogenicity") %>%
   filter(isolate != "test")
 ```
 
@@ -470,6 +471,48 @@ library(emmeans)
 means <- emmeans(mix_194, ~ genotype)
 cld(means)
 ```
+
+## Fungicide sensitivity
+
+### Import
+
+```{r message=FALSE, warning=FALSE}
+ec50 <- read_excel(here("data", "all-data.xlsx"), "ec50") 
+```
+
+### Summarize
+
+```{r}
+ec502 <- ec50 %>%
+  group_by(isolate, species, genotype)%>%
+  summarize(mean_ec50 = mean(ec50),
+            sd_ec50 = sd(ec50)
+            )
+```
+
+### Visualize
+
+Let's have a look at the mean EC50 for the isolates
+
+```{r}
+
+
+library(viridis)
+library(ggthemes)
+ec502 %>%
+  ggplot(aes(genotype, mean_ec50, color = species))+
+  geom_jitter(width = 0.1)+
+  #geom_errorbar(aes(min = mean_ec50 - sd_ec50, max = mean_ec50 + sd_ec50), width=0.2, position = position_dodge(width = 0.2))+
+  theme_few()+
+  theme(legend.position="right", legend.text=element_text(size=7, face = 'italic'))+
+    ylim(0,1.8)+
+ scale_color_viridis( discrete = TRUE)+
+  labs(y = (expression(paste('EC'[50], ' (', mu,'g/ml)'))), x = "Trichothecene genotype", color="Species")+
+  ggsave(here("figs", "ec50-new.png"), width=4.5, height=3)
+
+```
+
+
 
 
 
