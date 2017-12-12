@@ -17,7 +17,9 @@ library(cowplot)
 library(broom)
 library(agricolae)
 library(lattice)
-library(influence.ME)
+library(emmeans)
+library(car)
+library(scales)
 ```
 
 
@@ -85,14 +87,12 @@ glmm_per <- lmer(
 Let's check the single and interaction effects.
 
 ```{r message=FALSE, warning=FALSE}
-library(car)
 Anova(glmm_per)
 ```
 
 Evaluate the model
 
 ```{r}
-library(lattice)
 plot(glmm_per, type = c("p", "smooth"))
 qqmath(glmm_per, id = 0.05)
 ```
@@ -103,7 +103,6 @@ qqmath(glmm_per, id = 0.05)
 Not too bad. Let's now compare the means of treatments and create a dataframe which will be use to further create a plot with the estimated means and confidence interval. We used the `emmeans` package which is an update for the old `lsmeans` package. The syntax is the same as before. 
 
 ```{r message=FALSE, warning=FALSE}
-library(emmeans)
 medias <- emmeans(glmm_per, ~ species_genotype * substrate)
 med <- cld(medias, Letters = LETTERS, alpha = .05)
 
@@ -114,7 +113,7 @@ head(med)
 
 ### Figures 
 
-This new `med` dataframe does not contain the two original variables we want to use to plot the data. Let's separate the `species_genotypes` variable and create `genotype` and `species`.
+This new `med` dataframe does not contain the two original variables we want to use to plot the data. Let's separate the `species_genotype` variable and create `genotype` and `species`.
 
 ```{r}
 med2 <- med %>%
@@ -156,8 +155,8 @@ grid1
 There is one `xlsx` file with data from a single experiment. We will use `read_excel` to correctly load the centigrades symbol for the temperature factors after setting locale to `pt_BR.UTF-8`.
 
 ```{r message=FALSE, warning=FALSE}
-Sys.setlocale("LC_ALL", "pt_BR.UTF-8")
-mgr <- read_excel(here("data", "all-data.xlsx"), "mycelia") 
+
+mgr <- read_excel(here("data", "all-data.xlsx"), "mycelia")
 
 head(mgr)
 ```
@@ -203,7 +202,7 @@ We now create different datasets for each temperature and test the effect of `sp
 ```{r}
 # 15 C
 mgr15 <- mgr %>%
-  filter(temperature == "15 °C")
+  filter(temperature == "15")
 
 lmer_mgr15 <- lmer(mgr ~ species_genotype + (1 | species_genotype / isolate), data = mgr15, REML = FALSE)
 
@@ -211,7 +210,7 @@ Anova(lmer_mgr15)
 
 # 30 C
 mgr30 <- mgr %>%
-  filter(temperature == "30 °C")
+  filter(temperature == "30")
 
 lmer_mgr30 <- lmer(mgr ~ species_genotype + (1 | species_genotype / isolate), data = mgr30, REML = FALSE)
 
@@ -227,7 +226,7 @@ In this experiment, the production of macroconidia and further germination of 20
 ### Import 
 
 ```{r message=FALSE, warning=FALSE}
-spor <- read_excel(here("data", "all-data.xlsx"), "spor_germ") 
+spor <- read_excel(here("data", "all-data.xlsx"), "spor_germ")
 
 # again, we create the species_genotype variable
 spor <- spor %>%
@@ -241,7 +240,6 @@ head(spor)
 The code below will produce plots for total macroconidia production and percent germinated spores.
 
 ```{r message=FALSE, warning=FALSE}
-library(scales)
 spor1 <- spor %>%
   group_by(species, genotype, isolate) %>%
   summarize(mean_spor = mean(spores_ml))
@@ -299,7 +297,7 @@ med
 grid1 <- plot_grid(spor2, germ, labels = c("B", "C"), ncol = 2, align = "hv")
 
 grid5 <- plot_grid(mgr1, grid1, labels = c("A"), rel_heights = c(1, 1), ncol = 1, align = "hv")
-ggsave(here("figs", "figure3.png"), grid5, width = 5, height = 5)
+ggsave(here("figs", "figure2.png"), grid5, width = 5, height = 5)
 
 grid5
 ```
@@ -346,13 +344,65 @@ pathogen_Gua <- pathogen %>%
   )
 ```
 
+
+
+### Visualize temporal
+
+```{r message=FALSE, warning=FALSE}
+
+brs194 <- pathogen_194 %>%
+  group_by(dai, genotype, species) %>%
+  ggplot(aes(dai, mean_sev, color = species, shape = genotype, group = interaction(species, genotype))) +
+  geom_point(position = position_dodge(width = 0.9)) +
+  geom_line() +
+  geom_errorbar(
+    aes(min = mean_sev - sd_sev, max = mean_sev + sd_sev),
+    width = 0.2, alpha = 0.3, position = position_dodge(width = 0.9)
+  ) +
+  theme_few() +
+  ylim(0, 55) +
+  xlim(0, 25) +
+  theme(legend.position = "right", legend.text = element_text(size = 7, face = "italic")) +
+  scale_color_viridis(discrete = TRUE) +
+  labs(
+    y = "FHB severity (%) ", x = "Days after inoculation",
+    color = "species"
+  )
+
+brsgua <- pathogen_Gua %>%
+  group_by(dai, genotype, species) %>%
+  ggplot(aes(dai, mean_sev, color = species, shape = genotype, group = interaction(species, genotype))) +
+  geom_point(position = position_dodge(width = 0.9)) +
+  geom_line() +
+  geom_errorbar(
+    aes(min = mean_sev - sd_sev, max = mean_sev + sd_sev),
+    width = 0.2, alpha = 0.3, position = position_dodge(width = 0.9)
+  ) +
+  theme_few() +
+  theme(legend.position = "none") +
+  scale_color_viridis(discrete = TRUE) +
+  ylim(0, 55) +
+  xlim(0, 25) +
+  labs(
+    y = "FHB severity (%) ", x = "Days after inoculation",
+    color = "species"
+  )
+
+fig3 <- plot_grid(brsgua, brs194, labels = c("A", "B"), rel_widths = c(0.7, 1), ncol = 2, align = "hv")
+ggsave(here("figs", "figure3.png"), fig3, width = 9, height = 4)
+
+fig3
+```
+
+### Visualize AUDPC
+
 Let's calculate the area under the curve for each isolate. For this, we will use the `audpc` function of the `agricolae` package. First, we need to group several variables up to `dai` (days after inoculation). To make our life easier, lets use the `do` in conjuction with the `tidy` functions of the `dplyr` and `broom` package, respectively. This will calculate the audpce for each spike.
 
 ```{r}
 audpc_194 <- pathogen %>%
   filter(cultivar == "BRS 194") %>%
   # filter(exp == 2) %>%
-  unite(species_genotype, species, genotype, sep = "_", remove = F) %>% 
+  unite(species_genotype, species, genotype, sep = "_", remove = F) %>%
   select(
     exp, cultivar, dai, isolate, species_genotype, species, genotype, spike,
     sev
@@ -368,7 +418,7 @@ names(audpc_194)[8] <- "audpc"
 audpc_gua <- pathogen %>%
   filter(cultivar == "BRS Guamirim") %>%
   # filter(exp == 2) %>%
-   unite(species_genotype, species, genotype, sep = "_", remove = F) %>% 
+  unite(species_genotype, species, genotype, sep = "_", remove = F) %>%
   select(
     exp, cultivar, dai, isolate, species_genotype, species, genotype, spike,
     sev
@@ -380,14 +430,7 @@ names(audpc_gua)[8] <- "audpc"
 ```
 
 
-
-
-
-### Visualize 
-
-
 ```{r}
-
 audpc_194 %>%
   group_by(species, genotype) %>%
   summarize(
@@ -425,7 +468,7 @@ audpc_gua %>%
 
 mix_gua <- lmer(
   audpc ~ genotype +
-    (1 | exp/spike),
+    (1 | exp / spike),
   data = audpc_gua, REML = FALSE
 )
 ```
@@ -443,7 +486,6 @@ qqmath(mix_gua, id = 0.05)
 ```{r}
 Anova(mix_gua)
 
-library(emmeans)
 means <- emmeans(mix_gua, ~ genotype)
 cld(means)
 ```
@@ -467,7 +509,6 @@ qqmath(mix_194, id = 0.05)
 
 ```{r}
 Anova(mix_194)
-library(emmeans)
 means <- emmeans(mix_194, ~ genotype)
 cld(means)
 ```
@@ -477,17 +518,18 @@ cld(means)
 ### Import
 
 ```{r message=FALSE, warning=FALSE}
-ec50 <- read_excel(here("data", "all-data.xlsx"), "ec50") 
+ec50 <- read_excel(here("data", "all-data.xlsx"), "ec50")
 ```
 
 ### Summarize
 
 ```{r}
 ec502 <- ec50 %>%
-  group_by(isolate, species, genotype)%>%
-  summarize(mean_ec50 = mean(ec50),
-            sd_ec50 = sd(ec50)
-            )
+  group_by(isolate, species, genotype) %>%
+  summarize(
+    mean_ec50 = mean(ec50),
+    sd_ec50 = sd(ec50)
+  )
 ```
 
 ### Visualize
@@ -495,21 +537,16 @@ ec502 <- ec50 %>%
 Let's have a look at the mean EC50 for the isolates
 
 ```{r}
-
-
-library(viridis)
-library(ggthemes)
 ec502 %>%
-  ggplot(aes(genotype, mean_ec50, color = species))+
-  geom_jitter(width = 0.1)+
-  #geom_errorbar(aes(min = mean_ec50 - sd_ec50, max = mean_ec50 + sd_ec50), width=0.2, position = position_dodge(width = 0.2))+
-  theme_few()+
-  theme(legend.position="right", legend.text=element_text(size=7, face = 'italic'))+
-    ylim(0,1.8)+
- scale_color_viridis( discrete = TRUE)+
-  labs(y = (expression(paste('EC'[50], ' (', mu,'g/ml)'))), x = "Trichothecene genotype", color="Species")+
-  ggsave(here("figs", "ec50-new.png"), width=4.5, height=3)
-
+  ggplot(aes(genotype, mean_ec50, color = species)) +
+  geom_jitter(width = 0.1) +
+  # geom_errorbar(aes(min = mean_ec50 - sd_ec50, max = mean_ec50 + sd_ec50), width=0.2, position = position_dodge(width = 0.2))+
+  theme_few() +
+  theme(legend.position = "right", legend.text = element_text(size = 7, face = "italic")) +
+  ylim(0, 1.8) +
+  scale_color_viridis(discrete = TRUE) +
+  labs(y = (expression(paste("EC"[50], " (", mu, "g/ml)"))), x = "Trichothecene genotype", color = "Species") +
+  ggsave(here("figs", "ec50-new.png"), width = 4.5, height = 3)
 ```
 
 

@@ -378,7 +378,9 @@ div.tocify {
 <span class="kw">library</span>(broom)
 <span class="kw">library</span>(agricolae)
 <span class="kw">library</span>(lattice)
-<span class="kw">library</span>(influence.ME)</code></pre></div>
+<span class="kw">library</span>(emmeans)
+<span class="kw">library</span>(car)
+<span class="kw">library</span>(scales)</code></pre></div>
 </div>
 <div id="perithecia-production" class="section level2">
 <h2>Perithecia production</h2>
@@ -434,24 +436,21 @@ perithecia &lt;-<span class="st"> </span>perithecia <span class="op">%&gt;%</spa
   <span class="dt">data =</span> perithecia, <span class="dt">REML =</span> <span class="ot">FALSE</span>
 )</code></pre></div>
 <p>Let’s check the single and interaction effects.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car)
-<span class="kw">Anova</span>(glmm_per)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Anova</span>(glmm_per)</code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Chisq"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"100.37835","2":"4","3":"8.171411e-21"},{"1":"132.53032","2":"2","3":"1.664969e-29"},{"1":"36.48164","2":"7","3":"5.879297e-06"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Evaluate the model</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lattice)
-<span class="kw">plot</span>(glmm_per, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;p&quot;</span>, <span class="st">&quot;smooth&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(glmm_per, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;p&quot;</span>, <span class="st">&quot;smooth&quot;</span>))</code></pre></div>
 <p><img src="code_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqmath</span>(glmm_per, <span class="dt">id =</span> <span class="fl">0.05</span>)</code></pre></div>
 <p><img src="code_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
 <div id="means-comparison" class="section level4">
 <h4>Means comparison</h4>
 <p>Not too bad. Let’s now compare the means of treatments and create a dataframe which will be use to further create a plot with the estimated means and confidence interval. We used the <code>emmeans</code> package which is an update for the old <code>lsmeans</code> package. The syntax is the same as before.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(emmeans)
-medias &lt;-<span class="st"> </span><span class="kw">emmeans</span>(glmm_per, <span class="op">~</span><span class="st"> </span>species_genotype <span class="op">*</span><span class="st"> </span>substrate)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">medias &lt;-<span class="st"> </span><span class="kw">emmeans</span>(glmm_per, <span class="op">~</span><span class="st"> </span>species_genotype <span class="op">*</span><span class="st"> </span>substrate)
 med &lt;-<span class="st"> </span><span class="kw">cld</span>(medias, <span class="dt">Letters =</span> LETTERS, <span class="dt">alpha =</span> .<span class="dv">05</span>)
 
 <span class="co"># make output as a dataframe</span>
@@ -466,7 +465,7 @@ med &lt;-<span class="st"> </span><span class="kw">data.frame</span>(med)
 </div>
 <div id="figures" class="section level3">
 <h3>Figures</h3>
-<p>This new <code>med</code> dataframe does not contain the two original variables we want to use to plot the data. Let’s separate the <code>species_genotypes</code> variable and create <code>genotype</code> and <code>species</code>.</p>
+<p>This new <code>med</code> dataframe does not contain the two original variables we want to use to plot the data. Let’s separate the <code>species_genotype</code> variable and create <code>genotype</code> and <code>species</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">med2 &lt;-<span class="st"> </span>med <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">separate</span>(species_genotype, <span class="kw">c</span>(<span class="st">&quot;species&quot;</span>, <span class="st">&quot;genotype&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">extra =</span> <span class="st">&quot;merge&quot;</span>)
 <span class="co"># extra argument was used to keep the genotype information alltogether</span>
@@ -503,14 +502,12 @@ grid1</code></pre></div>
 <div id="import-1" class="section level3">
 <h3>Import</h3>
 <p>There is one <code>xlsx</code> file with data from a single experiment. We will use <code>read_excel</code> to correctly load the centigrades symbol for the temperature factors after setting locale to <code>pt_BR.UTF-8</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Sys.setlocale</span>(<span class="st">&quot;LC_ALL&quot;</span>, <span class="st">&quot;pt_BR.UTF-8&quot;</span>)</code></pre></div>
-<pre><code>## [1] &quot;pt_BR.UTF-8/pt_BR.UTF-8/pt_BR.UTF-8/C/pt_BR.UTF-8/C&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mgr &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;all-data.xlsx&quot;</span>), <span class="st">&quot;mycelia&quot;</span>) 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mgr &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;all-data.xlsx&quot;</span>), <span class="st">&quot;mycelia&quot;</span>)
 
 <span class="kw">head</span>(mgr)</code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["isolate"],"name":[1],"type":["chr"],"align":["left"]},{"label":["species"],"name":[2],"type":["chr"],"align":["left"]},{"label":["genotype"],"name":[3],"type":["chr"],"align":["left"]},{"label":["temperature"],"name":[4],"type":["chr"],"align":["left"]},{"label":["rep"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["5dg"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["mgr"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"10tr016","2":"F. cortaderiae","3":"3-ADON","4":"15 °C","5":"1","6":"3.75","7":"0.75"},{"1":"10tr016","2":"F. cortaderiae","3":"3-ADON","4":"15 °C","5":"2","6":"3.90","7":"0.78"},{"1":"10tr016","2":"F. cortaderiae","3":"3-ADON","4":"15 °C","5":"3","6":"3.75","7":"0.75"},{"1":"10tr178","2":"F. cortaderiae","3":"3-ADON","4":"15 °C","5":"1","6":"3.60","7":"0.72"},{"1":"10tr178","2":"F. cortaderiae","3":"3-ADON","4":"15 °C","5":"2","6":"3.30","7":"0.66"},{"1":"10tr178","2":"F. cortaderiae","3":"3-ADON","4":"15 °C","5":"3","6":"3.45","7":"0.69"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["isolate"],"name":[1],"type":["chr"],"align":["left"]},{"label":["species"],"name":[2],"type":["chr"],"align":["left"]},{"label":["genotype"],"name":[3],"type":["chr"],"align":["left"]},{"label":["temperature"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["rep"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["5dg"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["mgr"],"name":[7],"type":["dbl"],"align":["right"]}],"data":[{"1":"10tr016","2":"F. cortaderiae","3":"3-ADON","4":"15","5":"1","6":"3.75","7":"0.75"},{"1":"10tr016","2":"F. cortaderiae","3":"3-ADON","4":"15","5":"2","6":"3.90","7":"0.78"},{"1":"10tr016","2":"F. cortaderiae","3":"3-ADON","4":"15","5":"3","6":"3.75","7":"0.75"},{"1":"10tr178","2":"F. cortaderiae","3":"3-ADON","4":"15","5":"1","6":"3.60","7":"0.72"},{"1":"10tr178","2":"F. cortaderiae","3":"3-ADON","4":"15","5":"2","6":"3.30","7":"0.66"},{"1":"10tr178","2":"F. cortaderiae","3":"3-ADON","4":"15","5":"3","6":"3.45","7":"0.69"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -545,13 +542,13 @@ lmer_mgr &lt;-<span class="st"> </span><span class="kw">lmer</span>(mgr <span cl
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Anova</span>(lmer_mgr)</code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["Chisq"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"8.660966","2":"4","3":"7.015550e-02"},{"1":"410.223973","2":"1","3":"3.276222e-91"},{"1":"11.018529","2":"3","3":"1.162610e-02"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["Chisq"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"8.660965","2":"4","3":"7.015551e-02"},{"1":"410.223975","2":"1","3":"3.276219e-91"},{"1":"11.018529","2":"3","3":"1.162610e-02"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>We now create different datasets for each temperature and test the effect of <code>species_genotype</code> within each temperature.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 15 C</span>
 mgr15 &lt;-<span class="st"> </span>mgr <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(temperature <span class="op">==</span><span class="st"> &quot;15 °C&quot;</span>)
+<span class="st">  </span><span class="kw">filter</span>(temperature <span class="op">==</span><span class="st"> &quot;15&quot;</span>)
 
 lmer_mgr15 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mgr <span class="op">~</span><span class="st"> </span>species_genotype <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>species_genotype <span class="op">/</span><span class="st"> </span>isolate), <span class="dt">data =</span> mgr15, <span class="dt">REML =</span> <span class="ot">FALSE</span>)
 
@@ -563,7 +560,7 @@ lmer_mgr15 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mgr <span 
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 30 C</span>
 mgr30 &lt;-<span class="st"> </span>mgr <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(temperature <span class="op">==</span><span class="st"> &quot;30 °C&quot;</span>)
+<span class="st">  </span><span class="kw">filter</span>(temperature <span class="op">==</span><span class="st"> &quot;30&quot;</span>)
 
 lmer_mgr30 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mgr <span class="op">~</span><span class="st"> </span>species_genotype <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>species_genotype <span class="op">/</span><span class="st"> </span>isolate), <span class="dt">data =</span> mgr30, <span class="dt">REML =</span> <span class="ot">FALSE</span>)
 
@@ -581,7 +578,7 @@ lmer_mgr30 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mgr <span 
 <p>In this experiment, the production of macroconidia and further germination of 20 randomly selected spores of the different strains of the species-genotype combination, were evaluated in two runs of the experiment.</p>
 <div id="import-2" class="section level3">
 <h3>Import</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spor &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;all-data.xlsx&quot;</span>), <span class="st">&quot;spor_germ&quot;</span>) 
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spor &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;all-data.xlsx&quot;</span>), <span class="st">&quot;spor_germ&quot;</span>)
 
 <span class="co"># again, we create the species_genotype variable</span>
 spor &lt;-<span class="st"> </span>spor <span class="op">%&gt;%</span>
@@ -596,8 +593,7 @@ spor &lt;-<span class="st"> </span>spor <span class="op">%&gt;%</span>
 <div id="visualize-2" class="section level3">
 <h3>Visualize</h3>
 <p>The code below will produce plots for total macroconidia production and percent germinated spores.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(scales)
-spor1 &lt;-<span class="st"> </span>spor <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">spor1 &lt;-<span class="st"> </span>spor <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(species, genotype, isolate) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_spor =</span> <span class="kw">mean</span>(spores_ml))
 spor2 &lt;-<span class="st"> </span>spor1 <span class="op">%&gt;%</span>
@@ -653,7 +649,7 @@ med</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid1 &lt;-<span class="st"> </span><span class="kw">plot_grid</span>(spor2, germ, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>), <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">align =</span> <span class="st">&quot;hv&quot;</span>)
 
 grid5 &lt;-<span class="st"> </span><span class="kw">plot_grid</span>(mgr1, grid1, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>), <span class="dt">rel_heights =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">align =</span> <span class="st">&quot;hv&quot;</span>)
-<span class="kw">ggsave</span>(<span class="kw">here</span>(<span class="st">&quot;figs&quot;</span>, <span class="st">&quot;figure3.png&quot;</span>), grid5, <span class="dt">width =</span> <span class="dv">5</span>, <span class="dt">height =</span> <span class="dv">5</span>)
+<span class="kw">ggsave</span>(<span class="kw">here</span>(<span class="st">&quot;figs&quot;</span>, <span class="st">&quot;figure2.png&quot;</span>), grid5, <span class="dt">width =</span> <span class="dv">5</span>, <span class="dt">height =</span> <span class="dv">5</span>)
 
 grid5</code></pre></div>
 <p><img src="code_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
@@ -694,11 +690,60 @@ pathogen_Gua &lt;-<span class="st"> </span>pathogen <span class="op">%&gt;%</spa
     <span class="dt">mean_sev =</span> <span class="kw">mean</span>(sev),
     <span class="dt">sd_sev =</span> <span class="kw">sd</span>(sev)
   )</code></pre></div>
+</div>
+<div id="visualize-temporal" class="section level3">
+<h3>Visualize temporal</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">brs194 &lt;-<span class="st"> </span>pathogen_<span class="dv">194</span> <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(dai, genotype, species) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(dai, mean_sev, <span class="dt">color =</span> species, <span class="dt">shape =</span> genotype, <span class="dt">group =</span> <span class="kw">interaction</span>(species, genotype))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(
+    <span class="kw">aes</span>(<span class="dt">min =</span> mean_sev <span class="op">-</span><span class="st"> </span>sd_sev, <span class="dt">max =</span> mean_sev <span class="op">+</span><span class="st"> </span>sd_sev),
+    <span class="dt">width =</span> <span class="fl">0.2</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>)
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_few</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">55</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">25</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;right&quot;</span>, <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>, <span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">discrete =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(
+    <span class="dt">y =</span> <span class="st">&quot;FHB severity (%) &quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Days after inoculation&quot;</span>,
+    <span class="dt">color =</span> <span class="st">&quot;species&quot;</span>
+  )
+
+brsgua &lt;-<span class="st"> </span>pathogen_Gua <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(dai, genotype, species) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(dai, mean_sev, <span class="dt">color =</span> species, <span class="dt">shape =</span> genotype, <span class="dt">group =</span> <span class="kw">interaction</span>(species, genotype))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_errorbar</span>(
+    <span class="kw">aes</span>(<span class="dt">min =</span> mean_sev <span class="op">-</span><span class="st"> </span>sd_sev, <span class="dt">max =</span> mean_sev <span class="op">+</span><span class="st"> </span>sd_sev),
+    <span class="dt">width =</span> <span class="fl">0.2</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.9</span>)
+  ) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_few</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">discrete =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="dv">55</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlim</span>(<span class="dv">0</span>, <span class="dv">25</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(
+    <span class="dt">y =</span> <span class="st">&quot;FHB severity (%) &quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Days after inoculation&quot;</span>,
+    <span class="dt">color =</span> <span class="st">&quot;species&quot;</span>
+  )
+
+fig3 &lt;-<span class="st"> </span><span class="kw">plot_grid</span>(brsgua, brs194, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dt">rel_widths =</span> <span class="kw">c</span>(<span class="fl">0.7</span>, <span class="dv">1</span>), <span class="dt">ncol =</span> <span class="dv">2</span>, <span class="dt">align =</span> <span class="st">&quot;hv&quot;</span>)
+<span class="kw">ggsave</span>(<span class="kw">here</span>(<span class="st">&quot;figs&quot;</span>, <span class="st">&quot;figure3.png&quot;</span>), fig3, <span class="dt">width =</span> <span class="dv">9</span>, <span class="dt">height =</span> <span class="dv">4</span>)
+
+fig3</code></pre></div>
+<p><img src="code_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+</div>
+<div id="visualize-audpc" class="section level3">
+<h3>Visualize AUDPC</h3>
 <p>Let’s calculate the area under the curve for each isolate. For this, we will use the <code>audpc</code> function of the <code>agricolae</code> package. First, we need to group several variables up to <code>dai</code> (days after inoculation). To make our life easier, lets use the <code>do</code> in conjuction with the <code>tidy</code> functions of the <code>dplyr</code> and <code>broom</code> package, respectively. This will calculate the audpce for each spike.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">audpc_<span class="dv">194</span> &lt;-<span class="st"> </span>pathogen <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(cultivar <span class="op">==</span><span class="st"> &quot;BRS 194&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># filter(exp == 2) %&gt;%</span>
-<span class="st">  </span><span class="kw">unite</span>(species_genotype, species, genotype, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">remove =</span> F) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(species_genotype, species, genotype, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">remove =</span> F) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(
     exp, cultivar, dai, isolate, species_genotype, species, genotype, spike,
     sev
@@ -710,7 +755,7 @@ pathogen_Gua &lt;-<span class="st"> </span>pathogen <span class="op">%&gt;%</spa
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">audpc_gua &lt;-<span class="st"> </span>pathogen <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(cultivar <span class="op">==</span><span class="st"> &quot;BRS Guamirim&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="co"># filter(exp == 2) %&gt;%</span>
-<span class="st">   </span><span class="kw">unite</span>(species_genotype, species, genotype, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">remove =</span> F) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(species_genotype, species, genotype, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">remove =</span> F) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">select</span>(
     exp, cultivar, dai, isolate, species_genotype, species, genotype, spike,
     sev
@@ -719,9 +764,6 @@ pathogen_Gua &lt;-<span class="st"> </span>pathogen <span class="op">%&gt;%</spa
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_sev =</span> <span class="kw">mean</span>(sev)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">do</span>(<span class="kw">tidy</span>(<span class="kw">audpc</span>(.<span class="op">$</span>mean_sev, .<span class="op">$</span>dai)))
 <span class="kw">names</span>(audpc_gua)[<span class="dv">8</span>] &lt;-<span class="st"> &quot;audpc&quot;</span></code></pre></div>
-</div>
-<div id="visualize-3" class="section level3">
-<h3>Visualize</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">audpc_<span class="dv">194</span> <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(species, genotype) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(
@@ -733,7 +775,7 @@ pathogen_Gua &lt;-<span class="st"> </span>pathogen <span class="op">%&gt;%</spa
 <span class="st">  </span><span class="kw">theme_few</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.4</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">min =</span> mean_audpc <span class="op">-</span><span class="st"> </span>sd_audpc, <span class="dt">max =</span> mean_audpc <span class="op">+</span><span class="st"> </span>sd_audpc), <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.4</span>), <span class="dt">width =</span> <span class="fl">0.2</span>)</code></pre></div>
-<p><img src="code_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="code_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">audpc_gua <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">group_by</span>(species, genotype) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(
@@ -745,7 +787,7 @@ pathogen_Gua &lt;-<span class="st"> </span>pathogen <span class="op">%&gt;%</spa
 <span class="st">  </span><span class="kw">theme_few</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.4</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">min =</span> mean_audpc <span class="op">-</span><span class="st"> </span>sd_audpc, <span class="dt">max =</span> mean_audpc <span class="op">+</span><span class="st"> </span>sd_audpc), <span class="dt">position =</span> <span class="kw">position_dodge</span>(<span class="dt">width =</span> <span class="fl">0.4</span>), <span class="dt">width =</span> <span class="fl">0.2</span>)</code></pre></div>
-<p><img src="code_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="code_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 </div>
 <div id="model-3" class="section level3">
 <h3>Model</h3>
@@ -753,22 +795,21 @@ pathogen_Gua &lt;-<span class="st"> </span>pathogen <span class="op">%&gt;%</spa
 <h4>BRS Guamirim</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mix_gua &lt;-<span class="st"> </span><span class="kw">lmer</span>(
   audpc <span class="op">~</span><span class="st"> </span>genotype <span class="op">+</span>
-<span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>exp<span class="op">/</span>spike),
+<span class="st">    </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>exp <span class="op">/</span><span class="st"> </span>spike),
   <span class="dt">data =</span> audpc_gua, <span class="dt">REML =</span> <span class="ot">FALSE</span>
 )</code></pre></div>
 <p>Evaluate the model</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mix_gua, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;p&quot;</span>, <span class="st">&quot;smooth&quot;</span>))</code></pre></div>
-<p><img src="code_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="code_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqmath</span>(mix_gua, <span class="dt">id =</span> <span class="fl">0.05</span>)</code></pre></div>
-<p><img src="code_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
+<p><img src="code_files/figure-html/unnamed-chunk-31-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">Anova</span>(mix_gua)</code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Chisq"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"25.66522","2":"2","3":"2.672196e-06"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(emmeans)
-means &lt;-<span class="st"> </span><span class="kw">emmeans</span>(mix_gua, <span class="op">~</span><span class="st"> </span>genotype)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">means &lt;-<span class="st"> </span><span class="kw">emmeans</span>(mix_gua, <span class="op">~</span><span class="st"> </span>genotype)
 <span class="kw">cld</span>(means)</code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -778,9 +819,9 @@ means &lt;-<span class="st"> </span><span class="kw">emmeans</span>(mix_gua, <sp
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mix_<span class="dv">194</span> &lt;-<span class="st"> </span><span class="kw">lmer</span>(<span class="kw">log</span>(audpc) <span class="op">~</span><span class="st"> </span>genotype <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>exp <span class="op">/</span><span class="st"> </span>spike), <span class="dt">data =</span> audpc_<span class="dv">194</span>, <span class="dt">REML =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p>Evaluate the model</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mix_<span class="dv">194</span>, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;p&quot;</span>, <span class="st">&quot;smooth&quot;</span>))</code></pre></div>
-<p><img src="code_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="code_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">qqmath</span>(mix_<span class="dv">194</span>, <span class="dt">id =</span> <span class="fl">0.05</span>)</code></pre></div>
-<p><img src="code_files/figure-html/unnamed-chunk-33-2.png" width="672" /></p>
+<p><img src="code_files/figure-html/unnamed-chunk-34-2.png" width="672" /></p>
 </div>
 <div id="brs-194" class="section level4">
 <h4>BRS 194</h4>
@@ -790,8 +831,7 @@ means &lt;-<span class="st"> </span><span class="kw">emmeans</span>(mix_gua, <sp
 {"columns":[{"label":["Chisq"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["Df"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chisq)"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"12.59098","2":"2","3":"0.001844606"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(emmeans)
-means &lt;-<span class="st"> </span><span class="kw">emmeans</span>(mix_<span class="dv">194</span>, <span class="op">~</span><span class="st"> </span>genotype)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">means &lt;-<span class="st"> </span><span class="kw">emmeans</span>(mix_<span class="dv">194</span>, <span class="op">~</span><span class="st"> </span>genotype)
 <span class="kw">cld</span>(means)</code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
@@ -805,32 +845,31 @@ means &lt;-<span class="st"> </span><span class="kw">emmeans</span>(mix_<span cl
 <h2>Fungicide sensitivity</h2>
 <div id="import-4" class="section level3">
 <h3>Import</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ec50 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;all-data.xlsx&quot;</span>), <span class="st">&quot;ec50&quot;</span>) </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ec50 &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;all-data.xlsx&quot;</span>), <span class="st">&quot;ec50&quot;</span>)</code></pre></div>
 </div>
 <div id="summarize" class="section level3">
 <h3>Summarize</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ec502 &lt;-<span class="st"> </span>ec50 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(isolate, species, genotype)<span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_ec50 =</span> <span class="kw">mean</span>(ec50),
-            <span class="dt">sd_ec50 =</span> <span class="kw">sd</span>(ec50)
-            )</code></pre></div>
+<span class="st">  </span><span class="kw">group_by</span>(isolate, species, genotype) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarize</span>(
+    <span class="dt">mean_ec50 =</span> <span class="kw">mean</span>(ec50),
+    <span class="dt">sd_ec50 =</span> <span class="kw">sd</span>(ec50)
+  )</code></pre></div>
 </div>
-<div id="visualize-4" class="section level3">
+<div id="visualize-3" class="section level3">
 <h3>Visualize</h3>
 <p>Let’s have a look at the mean EC50 for the isolates</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(viridis)
-<span class="kw">library</span>(ggthemes)
-ec502 <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(genotype, mean_ec50, <span class="dt">color =</span> species))<span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.1</span>)<span class="op">+</span>
-<span class="st">  </span><span class="co">#geom_errorbar(aes(min = mean_ec50 - sd_ec50, max = mean_ec50 + sd_ec50), width=0.2, position = position_dodge(width = 0.2))+</span>
-<span class="st">  </span><span class="kw">theme_few</span>()<span class="op">+</span>
-<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position=</span><span class="st">&quot;right&quot;</span>, <span class="dt">legend.text=</span><span class="kw">element_text</span>(<span class="dt">size=</span><span class="dv">7</span>, <span class="dt">face =</span> <span class="st">&#39;italic&#39;</span>))<span class="op">+</span>
-<span class="st">    </span><span class="kw">ylim</span>(<span class="dv">0</span>,<span class="fl">1.8</span>)<span class="op">+</span>
-<span class="st"> </span><span class="kw">scale_color_viridis</span>( <span class="dt">discrete =</span> <span class="ot">TRUE</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> (<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;EC&#39;</span>[<span class="dv">50</span>], <span class="st">&#39; (&#39;</span>, mu,<span class="st">&#39;g/ml)&#39;</span>))), <span class="dt">x =</span> <span class="st">&quot;Trichothecene genotype&quot;</span>, <span class="dt">color=</span><span class="st">&quot;Species&quot;</span>)<span class="op">+</span>
-<span class="st">  </span><span class="kw">ggsave</span>(<span class="kw">here</span>(<span class="st">&quot;figs&quot;</span>, <span class="st">&quot;ec50-new.png&quot;</span>), <span class="dt">width=</span><span class="fl">4.5</span>, <span class="dt">height=</span><span class="dv">3</span>)</code></pre></div>
-<p><img src="code_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ec502 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(genotype, mean_ec50, <span class="dt">color =</span> species)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">width =</span> <span class="fl">0.1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="co"># geom_errorbar(aes(min = mean_ec50 - sd_ec50, max = mean_ec50 + sd_ec50), width=0.2, position = position_dodge(width = 0.2))+</span>
+<span class="st">  </span><span class="kw">theme_few</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;right&quot;</span>, <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">7</span>, <span class="dt">face =</span> <span class="st">&quot;italic&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylim</span>(<span class="dv">0</span>, <span class="fl">1.8</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">discrete =</span> <span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">y =</span> (<span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;EC&quot;</span>[<span class="dv">50</span>], <span class="st">&quot; (&quot;</span>, mu, <span class="st">&quot;g/ml)&quot;</span>))), <span class="dt">x =</span> <span class="st">&quot;Trichothecene genotype&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;Species&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggsave</span>(<span class="kw">here</span>(<span class="st">&quot;figs&quot;</span>, <span class="st">&quot;ec50-new.png&quot;</span>), <span class="dt">width =</span> <span class="fl">4.5</span>, <span class="dt">height =</span> <span class="dv">3</span>)</code></pre></div>
+<p><img src="code_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 </div>
 
