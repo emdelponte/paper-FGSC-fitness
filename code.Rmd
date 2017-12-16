@@ -9,7 +9,6 @@ The data com from a series of different experiments. There is one single `xlsx` 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 library(tidyverse)
 library(here)
-library(readxl)
 library(viridis)
 library(ggthemes)
 library(lme4)
@@ -30,7 +29,7 @@ library(scales)
 Let's first import the data and have a look at the raw data.
 
 ```{r message=FALSE, warning=FALSE}
-perithecia <- read_excel(here("data", "all-data.xlsx"), "perithecia") %>%
+perithecia <- read_csv(here("data", "perithecia.csv")) %>%
   filter(genotype != "t")
 
 perithecia
@@ -129,7 +128,7 @@ g2 <- med2 %>%
   ggplot(aes(reorder(genotype, -emmean), emmean, color = species)) +
   geom_point(position = position_dodge(width = 0.3)) +
   theme_few() +
-  theme(legend.position = "right", legend.text = element_text(size = 6, face = "italic"), axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme(legend.position = "right", legend.text = element_text(size = 8, face = "italic"), axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_color_viridis(discrete = TRUE) +
   facet_wrap(~substrate) +
   geom_errorbar(
@@ -144,7 +143,7 @@ Finally, we prepare and save the Figure 1 of the manuscript which is a combo fig
 
 ```{r message=FALSE, warning=FALSE}
 grid1 <- plot_grid(g1, g2, labels = c("A", "B"), align = "hv", ncol = 1)
-ggsave(here("figs", "figure1.png"), grid1, width = 6, height = 6)
+ggsave(here("figs", "figure1.png"), grid1, width = 6, height = 7)
 grid1
 ```
  
@@ -152,11 +151,11 @@ grid1
 
 ### Import 
 
-There is one `xlsx` file with data from a single experiment. We will use `read_excel` to correctly load the centigrades symbol for the temperature factors after setting locale to `pt_BR.UTF-8`.
+There is one `csv` file with data from a single experiment. We will use `read_csv` to impor the data.
 
 ```{r message=FALSE, warning=FALSE}
 
-mgr <- read_excel(here("data", "all-data.xlsx"), "mycelia")
+mgr <- read_csv(here("data", "mycelia.csv"))
 
 head(mgr)
 ```
@@ -180,7 +179,7 @@ mgr1 <- mgr %>%
   ) +
   labs(
     x = "Trichothecene Genotype",
-    y = "Mycelial growth rate (mm/day)", color = "Species"
+    y = "MGR (mm/day)", color = "Species"
   ) +
   ylim(0.2, 1.8)
 ```
@@ -226,7 +225,7 @@ In this experiment, the production of macroconidia and further germination of 20
 ### Import 
 
 ```{r message=FALSE, warning=FALSE}
-spor <- read_excel(here("data", "all-data.xlsx"), "spor_germ")
+spor <- read_csv(here("data", "spor_germ.csv"))
 
 # again, we create the species_genotype variable
 spor <- spor %>%
@@ -248,8 +247,8 @@ spor2 <- spor1 %>%
   geom_jitter(width = 0.1, size = 3) +
   theme_few() +
   scale_color_viridis(discrete = TRUE) +
-  theme(legend.position = c(1, 5), axis.text.x = element_text(angle = 0, hjust = 0.5, size = 7), legend.text = element_text(size = 7, face = "italic"), axis.title = element_text(size = 8)) +
-  labs(x = "", y = "Macroconidia count (x 10.000)", color = "Species") +
+  theme(legend.position = c(1, 5), axis.text.x = element_text(angle = 0, hjust = 0.5, size = 7), legend.text = element_text(size = 12, face = "italic"), axis.title = element_text(size = 12)) +
+  labs(x = "", y = "N. of macroconidia (x10.000)", color = "Species") +
   ylim(0, 5) +
   guides(colour = guide_legend(nrow = 2))
 ```
@@ -265,7 +264,7 @@ germ <- germ1 %>%
   geom_jitter(width = 0.1, size = 3) +
   theme_few() +
   scale_color_viridis(discrete = TRUE) +
-  theme(legend.position = "none", axis.text.x = element_text(angle = 0, hjust = 0.5, size = 7), legend.text = element_text(size = 7, face = "italic"), axis.title = element_text(size = 8)) +
+  theme(legend.position = "none", axis.text.x = element_text(angle = 0, hjust = 0.5, size = 7), legend.text = element_text(size = 12, face = "italic"), axis.title = element_text(size = 12)) +
   labs(x = "", y = "Germination rate (%)", color = "Species") +
   guides(colour = guide_legend(nrow = 2))
 ```
@@ -291,13 +290,13 @@ med <- data.frame(med)
 med
 ```
 
-### Figure 3
+### Figure 2
 
 ```{r message=FALSE, warning=FALSE}
 grid1 <- plot_grid(spor2, germ, labels = c("B", "C"), ncol = 2, align = "hv")
 
 grid5 <- plot_grid(mgr1, grid1, labels = c("A"), rel_heights = c(1, 1), ncol = 1, align = "hv")
-ggsave(here("figs", "figure2.png"), grid5, width = 5, height = 5)
+ggsave(here("figs", "figure2.png"), grid5, width = 6, height = 6.2)
 
 grid5
 ```
@@ -308,7 +307,7 @@ grid5
 
 
 ```{r message=FALSE, warning=FALSE}
-pathogen <- read_excel(here("data", "all-data.xlsx"), "pathogenicity") %>%
+pathogen <- read_csv(here("data", "pathogenicity.csv")) %>%
   filter(isolate != "test")
 ```
 
@@ -362,7 +361,7 @@ brs194 <- pathogen_194 %>%
   theme_few() +
   ylim(0, 55) +
   xlim(0, 25) +
-  theme(legend.position = "right", legend.text = element_text(size = 7, face = "italic")) +
+  theme(legend.position = "right", legend.text = element_text(size = 9, face = "italic")) +
   scale_color_viridis(discrete = TRUE) +
   labs(
     y = "FHB severity (%) ", x = "Days after inoculation",
@@ -477,8 +476,8 @@ Evaluate the model
 
 ```{r message=FALSE, warning=FALSE}
 
-plot(mix_gua, type = c("p", "smooth"))
-qqmath(mix_gua, id = 0.05)
+plot(mix_gua, type = c("p", "smooth"), col = "black")
+qqmath(mix_gua, id = 0.05, col = "black")
 ```
 
 
@@ -500,8 +499,8 @@ Evaluate the model
 
 ```{r}
 
-plot(mix_194, type = c("p", "smooth"))
-qqmath(mix_194, id = 0.05)
+plot(mix_194, type = c("p", "smooth"), col = "black")
+qqmath(mix_194, id = 0.05, col = "black")
 ```
 
 
@@ -518,7 +517,7 @@ cld(means)
 ### Import
 
 ```{r message=FALSE, warning=FALSE}
-ec50 <- read_excel(here("data", "all-data.xlsx"), "ec50")
+ec50 <- read_csv(here("data", "ec50.csv"))
 ```
 
 ### Summarize

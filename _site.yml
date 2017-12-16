@@ -5,7 +5,7 @@ output:
     css: style.css
     theme: flatly
     df_print: paged
-    highlight: pygments
+    highlight: default
     include:
       after_body: footer.md
     toc: yes
