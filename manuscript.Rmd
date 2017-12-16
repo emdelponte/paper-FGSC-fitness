@@ -17,13 +17,14 @@ Corresponding author: Emerson M. Del Ponte, email: delponte@ufv.br
 Key words: Triticum aestivum, trichothecenes, fitness, FGSC.
 
 
+
 ## Introduction
 
 Fusarium head blight (FHB) is a major disease of wheat and small grain crops due to the reduction in yield and contamination of grain with dangerous mycotoxins (McMullen et al. 2012). Deoxynivalenol (DON) is the most significant mycotoxin given its widespread occurrence at levels of concern to human and animal health (Tanaka et al. 1988). However, nivalenol (NIV), another type-B trichothecene, has been found in commercial wheat samples from Brazil (Del Ponte et al. 2015) and also in inoculations of wheat under controlled conditions (Mendes et al. 2018; Nicolli et al. 2015). A molecular survey conducted during the last decade showed that *Fusarium graminearum* (O’Donnell et al. 2004), formerly lineage 7 (O’Donnell et al. 2000), is the main (>85% frequency) *F. graminearum* species complex (FGSC) member causing FHB of wheat in Brazil (Del Ponte et al. 2015). The **F. graminearum** strains found in Brazilian wheat and barley analyzed so far are exclusively of the 15-acetyl(A)DON genotype, a mainly DON producer (Astolfi et al. 2012; Castañares et al. 2016; Del Ponte et al. 2015). *Fusarium meridionale* is the second most dominant FHB pathogen (>15% overall) and an important regional contributor of FHB in the major wheat-producing region of Brazil, Paraná State, where its frequency increases to ~30% in wheat spikes and grain (Del Ponte et al. 2015). This species is the main cause (> 96% frequency) of Gibberella ear rot and stalk rot as well the most frequent species surviving on maize stubbles, a large reservoir of inoculum for FHB epidemics (Del Ponte et al. 2015; Kuhnem et al. 2015). Other FGSC members that occur at smaller frequency in wheat include *F. cortaderiae* and *F. austroamericanum* that possesses either 3ADON or NIV trichothecene genotype (Del Ponte et al. 2015). Nivalenol, as well as 3-ADON strains within FGSC members are actually much less common in wheat grown in the Americas, especially in Brazil (Del Ponte et al. 2015), but there are concerns about their ability to produce different or greater amount of trichothecenes (Mendes et al. 2018; Umpiérrez-Failache et al. 2013) and potential shifts in climate that may favor build up of inoculum of the currently minor species (Juroszek et al. 2013; Vaughan et al. 2016). In the state of Louisiana, U.S., NIV-type populations of *F. graminearum*, which were found at high frequency (79%) among isolates from small-grain-growing regions, accumulated four times less trichothecene toxin than DON types on inoculated wheat (Gale et al. 2011). The 3-ADON strains of *F. graminearum*, which appeared to emerge and spread into some regions of North America, were able to produce higher quantities of total trichothecenes and exhibit higher fecundity and growth rates than 15-ADON strains (Ward et al. 2008). More recently, the aggressiveness of *F. graminearum* strains of the 15ADON or 3-ADON genotypes from New York towards a susceptible wheat cultivar did not differ, thus suggesting no apparent advantage of 3-ADON compared to 15-ADON genotype, although the former produced significantly greater amount of trichothecenes (Spolti et al. 2014a). 
 
-In the south of Brazil, besides the dominant *F. graminearum* of the 15-ADON chemotype population, 3-ADON strains were found only in *F. cortaderiae* and *F. austroamericanum* isolates, while the NIV genotype was found in *F. cortaderiae*, *F. meridionale* and *F. asiaticum* (Del Ponte et al. 2015). The 3-ADON strains from wheat were found at higher elevation regions with cooler winter and spring seasons, which suggested that climate could also shape species composition, besides cereal hosts (Del Ponte et al. 2015). A recent study comparing 15-ADON and NIV strains of *F. graminearum* from China showed that the former grew faster at both 20 °C and 25 °C, produced higher amount of perithecia, and were more aggressive towards a wheat cultivar (Liu et al. 2017). These findings of enhanced aggressiveness of the 15-ADON agree with studies in Brazil, although the NIV strains were of a different species (*F. meridionale*) (Spolti et al. 2012a; Spolti et al. 2013). The toxigenic potential of *F. graminearum* also appeared to be higher than F. meridionale because much greater amount of DON was produced compared to NIV produced by the latter (Nicolli et al. 2015).
+In the south of Brazil, besides the dominant *F. graminearum* of the 15-ADON chemotype population, 3-ADON strains were found only in *F. cortaderiae* and *F. austroamericanum* isolates, while the NIV genotype was found in *F. cortaderiae*, *F. meridionale* and *F. asiaticum* (Del Ponte et al. 2015). The 3-ADON strains from wheat were found at higher elevation regions with cooler winter and spring seasons, which suggested that climate could also shape species composition, besides cereal hosts (Del Ponte et al. 2015). A recent study comparing 15-ADON and NIV strains of *F. graminearum* from China showed that the former grew faster at both 20 <sup>o</sup>C and 25 <sup>o</sup>C, produced higher amount of perithecia, and were more aggressive towards a wheat cultivar (Liu et al. 2017). These findings of enhanced aggressiveness of the 15-ADON agree with studies in Brazil, although the NIV strains were of a different species (*F. meridionale*) (Spolti et al. 2012a; Spolti et al. 2013). The toxigenic potential of *F. graminearum* also appeared to be higher than F. meridionale because much greater amount of DON was produced compared to NIV produced by the latter (Nicolli et al. 2015).
 
-Empirical knowledge of some components of the life cycle of other FGSC members than *F. graminearum* and F. meridionale in Brazil, such as the saprophytic ability, and whether this is influenced by the cereal-based substrate and temperature, which may provide competitive advantages for a species to build up inoculum for further spread are not available. In this study, a sample of 30 strains representative of three trichothecene genotypes among four FGSC members associated with FHB of wheat in southern Brazil was selected to investigate on the fitness-related traits related to both the saprophytic and pathogenic phase.
+Empirical knowledge of some components of the life cycle of other FGSC members than *F. graminearum* and F. meridionale in Brazil, such as the saprophytic ability, and whether this is influenced by the cereal-based substrate and temperature, which may provide competitive advantages for a species to build up inoculum for further spread are not available. In this study, a sample of 30 strains representative of three trichothecene genotypes among four FGSC members associated with FHB of wheat in southern Brazil was selected to investigate the fitness-related traits related to both the saprophytic and pathogenic phase.
 
 ## Material and Methods
 
@@ -31,25 +32,66 @@ Empirical knowledge of some components of the life cycle of other FGSC members t
 
 The thirty isolates selected for this study were originated from surveys of symptomatic wheat spikes in commercial fields during four seasons (2007/08 to 2011/12) in southern Brazil. These were accurately identified to species and trichothecenes genotypes using PCR-based and multilocus-genotyping (MLGT) assays (Astolfi et al. 2012; Del Ponte et al. 2015). The strains were deposited and are available upon request at a mycological collection (CML - “Coleção Micológica de Lavras”). Table 1 shows detailed information for these strains and indicates in which experiments they were used. A total of five different experiments were conducted to assess saprophytic (sexual and asexual reproduction), pathogenic (severity towards two cultivars), and sensitivity to a triazole fungicide (tebuconazole).
 
+**Table 1.** Information for a collection of 30 strains belonging to four phylogenetic species of the Fusarium graminearum species complex isolated from symptomatic wheat heads from fields in Rio Grande do Sul State, Brazil, which were used in five different experiments in this study
+
+
+| CML Code<sup>a</sup> | Location             | Year of isolation | Species             | Genotype<sup>b</sup> | Experiment<sup>c</sup> |
+|------|----------------------|-------------------|---------------------|----------|------------|
+| 3065 | Panambi              | 2009              | F. graminearum      | 15-ADON  | 2, 3, 4    |
+| 3066 | Ijuí                 | 2009              | F. graminearum      | 15-ADON  | 1,4        |
+| 3067 | Carazinho            | 2010              | F. graminearum      | 15-ADON  | 1,2,3,4    |
+| 3071 | Tapejara             | 2010              | F. graminearum      | 15-ADON  | 1,2,3,4,5  |
+| 3069 | Coxilha              | 2010              | F. graminearum      | 15-ADON  | 1, 2, 4,5  |
+| 3070 | Santa Bárbara do Sul | 2011              | F. graminearum      | 15-ADON  | 1, 2, 4    |
+| 3830 | Não-Me-Toque         | 2011              | F. graminearum      | 15-ADON  | 1,2,3      |
+| 3833 | Não-Me-Toque         | 2011              | F. graminearum      | 15-ADON  | 1          |
+| 3064 | Cruz Alta            | 2007              | F. graminearum      | 15-ADON  | 1,4,5      |
+| 3068 | Ernestina            | 2007              | F. graminearum      | 15-ADON  | 1,2,3,4,5  |
+| 3382 | Caseiros             | 2010              | F. austroamericanum | 3-ADON   | 1,2,3,5    |
+| 3384 | Barreto              | 2010              | F. austroamericanum | 3-ADON   | 1,2,3,4,5  |
+| 3379 | Carazinho            | 2010              | F. cortaderiae      | 3-ADON   | 1,2,3,4,5  |
+| 3845 | Lagoa Vermelha       | 2010              | F. cortaderiae      | 3-ADON   | 1,2,3,4    |
+| 3841 | Lagoa Vermelha       | 2010              | F. cortaderiae      | 3-ADON   | 1,2,3,4,5  |
+| 3831 | Panambi              | 2009              | F. cortaderiae      | NIV      | 1,2,3,4,5  |
+| 3836 | Coronel Barros       | 2009              | F. cortaderiae      | NIV      | 1,2,4      |
+| 3837 | Coronel Barros       | 2009              | F. cortaderiae      | NIV      | 1,2,3,4,5  |
+| 3840 | Mato Castelhano      | 2010              | F. cortaderiae      | NIV      | 1,2,4      |
+| 3834 | Barreto              | 2010              | F. cortaderiae      | NIV      | 1,2,4      |
+| 3378 | Vacaria              | 2010              | F. cortaderiae      | NIV      | 1,2,3,4,5  |
+| 3835 | Ernestina            | 2007              | F. cortaderiae      | NIV      | 1,2,3,4    |
+| 3375 | Santa Bárbara do Sul | 2009              | F. meridionale      | NIV      | 1,2,4      |
+| 3843 | Ernestina            | 2009              | F. meridionale      | NIV      | 1,2,3,4    |
+| 3344 | Coxilha              | 2009              | F. meridionale      | NIV      | 1,2,3,4,5  |
+| 3381 | Caseiros             | 2010              | F. meridionale      | NIV      | 1,2,3,4,5  |
+| 3839 | Marau                | 2011              | F. meridionale      | NIV      | 1,2,3,4,5  |
+| 3377 | Sertão               | 2011              | F. meridionale      | NIV      | 1,2,3,4    |
+| 3838 | Nonoai               | 2007              | F. meridionale      | NIV      | 1,2,3,4    |
+| 3374 | Nonoai               | 2007              | F. meridionale      | NIV      | 1,2,4      |
+
+<sup>a</sup> Culture collection code: CML = Coleção Micológica de Lavras, Universidade Federal de Lavras, Lavras, Minas Gerais, Brazil.
+<sup>b</sup> Trichothecene genotype identified by the Luminex method: 15-ADON = 15-acetyl-deoxynivalenol; 3-ADON = 3-acetyl-deoxynivalenol; NIV = nivalenol.
+<sup>c</sup> Experiments: 1 = Perithecial production; 2 = Mycelial growth; 3 = Sporulation and germination; 4 = Pathogenicity; 5 = Sensitivity to tebuconazole.
+
+
 ### Perithecial production
 
-Perithecial production, as indicative of sexual fertility, was evaluated using kernel-based substrates composed of a distinct cereal host: wheat, rice or maize. The method was adapted from Chen & Zhou (2009). Briefly, 20g of grain was soaked in 10 mL distilled water and autoclaved for 20 min at 127 ° C daily during consecutive days. Afterwards, kernels were inoculated with three discs (6 mm diameter) of mycelia and kept in the dark for 21 days at 25 °C. Then, the colonized grains were transferred to a bench in a greenhouse with controlled temperature (25 ±3 °C) where they remained for seven days for drying. After drying, they were placed in plastic box (11 x 11 x 3.5 cm) containing sterile sand layer (2 cm) and three sheets of filter paper on top of the sand. The filter paper was moistened daily with sterile distilled water. After 21 days, 50 grains were randomly selected from each substrate-isolate combination and individually scored visually using a diagrammatic key developed for this study and which contains four scores representing a percent range for the grain surface covered with perithecia (Supplementary Fig. 1). The frequency of the scores for each species-genotype combination (five groups) was normalized to a perithecial production index (PPI, %). 
+Perithecial production, as indicative of sexual fertility, was evaluated using kernel-based substrates composed of a distinct cereal host: wheat, rice or maize. The method was adapted from Chen & Zhou (2009). Briefly, 20g of grain was soaked in 10 mL distilled water and autoclaved for 20 min at 127 <sup>o</sup> C daily during consecutive days. Afterwards, kernels were inoculated with three discs (6 mm diameter) of mycelia and kept in the dark for 21 days at 25 <sup>o</sup>C. Then, the colonized grains were transferred to a bench in a greenhouse with controlled temperature (25 ±3 <sup>o</sup>C) where they remained for seven days for drying. After drying, they were placed in plastic box (11 x 11 x 3.5 cm) containing sterile sand layer (2 cm) and three sheets of filter paper on top of the sand. The filter paper was moistened daily with sterile distilled water. After 21 days, 50 grains were randomly selected from each substrate-isolate combination and individually scored visually using a diagrammatic key developed for this study and which contains four scores representing a percent range for the grain surface covered with perithecia (Supplementary Fig. 1). The frequency of the scores for each species-genotype combination (five groups) was normalized to a perithecial production index (PPI, %). 
 
 ### Mycelial growth 
 
-Isolates grown on PDA (20 mL per dish) for seven days at 25 °C in continuous darkness provided mycelial discs (6 mm diameter) which were individually placed in the center of plastic Petri dishes (90 mm diameter). The cultures were incubated in growth chambers at two regimes of sub-optimal constant temperature (15 °C or 30 °C) under continuous darkness for five days when the diameter of the colony was measured from two perpendicular directions. The mycelial growth rate (mm/day) was calculated after subtracting the mycelium plug size (Spolti et al. 2012b). Three replicates (plates) were used per treatment. 
+Isolates grown on PDA (20 mL per dish) for seven days at 25 <sup>o</sup>C in continuous darkness provided mycelial discs (6 mm diameter) which were individually placed in the center of plastic Petri dishes (90 mm diameter). The cultures were incubated in growth chambers at two regimes of sub-optimal constant temperature (15 <sup>o</sup>C or 30 <sup>o</sup>C) under continuous darkness for five days when the diameter of the colony was measured from two perpendicular directions. The mycelial growth rate (mm/day) was calculated after subtracting the mycelium plug size (Spolti et al. 2012b). Three replicates (plates) were used per treatment. 
 
 ### Sporulation and germination 
 
-The asexual fecundity of the strains was evaluated based on the macroconidia production in culture medium. Isolates were grown on SNA media for seven days under a 12/12 h light/dark cycle at 25 ° C (Leslie and Summerell, 2006). After this period, three discs of 6 mm in diameter were removed from the edges of the developing colonies and immersed in 5 mL of sterile distilled water containing 0.1 mL Tween 0.001% in a test tube and shaken for 20 s. The spore numbers were counted and the sporulation expressed as number of spores/mL. Spore germination was observed for a subsample of 20 spores (three replicated slides) after six hours of exposure to water and results were expressed as percent of germinating spores. 
+The asexual fecundity of the strains was evaluated based on the macroconidia production in culture medium. Isolates were grown on SNA media for seven days under a 12/12 h light/dark cycle at 25 <sup>o</sup> C (Leslie and Summerell, 2006). After this period, three discs of 6 mm in diameter were removed from the edges of the developing colonies and immersed in 5 mL of sterile distilled water containing 0.1 mL Tween 0.001% in a test tube and shaken for 20 s. The spore numbers were counted and the sporulation expressed as number of spores/mL. Spore germination was observed for a subsample of 20 spores (three replicated slides) after six hours of exposure to water and results were expressed as percent of germinating spores. 
 
 ### Pathogenicity 
 
-The pathogenicity of the strains was evaluated using a susceptible (BRS 194) and a moderately resistant (BRS Guamirim) cultivar. Seeds were sown in plastic pots (3 L) containing carbonized rice husk substrate (Tropstrato HT vegetables) fertilized with macronutrients (NPK 4-14-8). After seedling emergence, they were thinned to obtain 10 plants per pot. Inoculations were performed during the milk stage of grain development of the main tillers of the plants using the central-spikelet method (Engle et al. 2003). The mid-position spikelet (sixth from top to bottom) was marked with a pen and 20 µL of a spore suspension (105 conidia/mL) was gently applied inside the floret with the aid of a micropipette (Spolti et al. 2012b). After inoculation, the plants were kept at constant temperature (25 °C) to induce infection. The proportion of diseased spikelets in the wheat head was evaluated every three to five days during three weeks after inoculation. The experiment was repeated once in time and the data combined for analysis. The area under the diseased progress curve (AUDPC) was calculated and used to evaluate the effect of the trichothecene genotypes.
+The pathogenicity of the strains was evaluated using a susceptible (BRS 194) and a moderately resistant (BRS Guamirim) cultivar. Seeds were sown in plastic pots (3 L) containing carbonized rice husk substrate (Tropstrato HT vegetables) fertilized with macronutrients (NPK 4-14-8). After seedling emergence, they were thinned to obtain 10 plants per pot. Inoculations were performed during the milk stage of grain development of the main tillers of the plants using the central-spikelet method (Engle et al. 2003). The mid-position spikelet (sixth from top to bottom) was marked with a pen and 20 µL of a spore suspension (105 conidia/mL) was gently applied inside the floret with the aid of a micropipette (Spolti et al. 2012b). After inoculation, the plants were kept at constant temperature (25 <sup>o</sup>C) to induce infection. The proportion of diseased spikelets in the wheat head was evaluated every three to five days during three weeks after inoculation. The experiment was repeated once in time and the data combined for analysis. The area under the diseased progress curve (AUDPC) was calculated and used to evaluate the effect of the trichothecene genotypes.
 
 ### Sensitivity to tebuconazole
 
-Tebuconazole sensitivity was quantified by measuring mycelial growth on PDA media (potato dextrose agar) amended with increasing fungicide concentrations (Becher et al. 2010; Spolti et al. 2014b). Stock solution (100 μg active ingredient [a.i.]/mL) was adjusted by dilution of commercial formulation (Folicur 200 EC, BAYER S.A., 20% a.i.) in distilled. Stock solution was added to cooled PDA to obtain the following tested concentrations of 0.0; 0.5; 1.0; 2.0, 4.0 and 8.0 μg a.i./mL. One mycelia agar disc (6 mm in diameter) obtained from the edge of a 7-day-old culture was placed at the central position of a Petri dish (90 mm) containing 15 mL of PDA amended with the fungicide at each concentration. After four days of incubation at 25°C in darkness, radial growth was measured in two perpendicular directions and the disc diameter was subtracted. For each repeat of the experiment, two replicates were used. The effective fungicide concentration to reduce 50% of mycelial growth (EC50) was determined using a linear regression model as described elsewhere (Becher et al. 2010; Spolti et al. 2014b). 
+Tebuconazole sensitivity was quantified by measuring mycelial growth on PDA media (potato dextrose agar) amended with increasing fungicide concentrations (Becher et al. 2010; Spolti et al. 2014b). Stock solution (100 μg active ingredient [a.i.]/mL) was adjusted by dilution of commercial formulation (Folicur 200 EC, BAYER S.A., 20% a.i.) in distilled. Stock solution was added to cooled PDA to obtain the following tested concentrations of 0.0; 0.5; 1.0; 2.0, 4.0 and 8.0 μg a.i./mL. One mycelia agar disc (6 mm in diameter) obtained from the edge of a 7-day-old culture was placed at the central position of a Petri dish (90 mm) containing 15 mL of PDA amended with the fungicide at each concentration. After four days of incubation at 25<sup>o</sup>C in darkness, radial growth was measured in two perpendicular directions and the disc diameter was subtracted. For each repeat of the experiment, two replicates were used. The effective fungicide concentration to reduce 50% of mycelial growth (EC50) was determined using a linear regression model as described elsewhere (Becher et al. 2010; Spolti et al. 2014b). 
 
 ### Statistical analyses
 
@@ -58,22 +100,47 @@ For the data from the experiments to evaluate saprophytic growth (perithecia for
 ## Results
 
 ### Saprophytic fitness 
+
 The proportion of grains with scores >1 (or >10% kernel area covered with perithecia) was apparently higher for maize and rice kernels substrates compared with wheat and for the 15-ADON isolates compared with NIV and 3-ADON (Figure 1A). All interactions tested in the model (species, genotypes or species-genotype combined versus substrates) significantly affected (P <0.001) perithecial production index (PPI), which was highest (>50%) for 15-ADON *F. graminearum* strains inoculated on rice and maize, and lowest for inoculations on wheat kernels (Figure 1B). There was a general trend of decreasing PPI in the wheat kernel substrate compared with the rice and maize substrates, as well as in the 3-ADON strains compared with the 15-ADON strains. For the two NIV-producing species, PPI was higher in F. meridionale strains than in F. cortaderiae strains inoculated in rice and maize, but not in wheat. There was no difference (*P* > 0.05) in PPI between the two 3-ADON species, regardless of the substrate. 
 
-As expected, mean values of mycelial growth rate (MGR) was 84% higher at 30 °C (0.7 mm/day) than at 15 °C (1.2 mm/day) regardless of the trichothecene genotype. Within each of the temperatures, there were no differences in MGR means among the trichothecene genotypes (*P* > 0.20) as well as between species within trichothecene genotypes (Figure 2A). The variation in MGR was apparently higher within 15-ADON strains compared with the others, especially for the high temperature.
 
-All strains yielded macroconidia and there were differences in conidia production among the genotypes (P = 0.057), which were more evident when species-genotypes were compared (P < 0.001). The most prolific species was *F. meridionale* (2.18 x 103 spores/mL), which differed significantly from the other species (0.58 to 0.9 x 103 spores/mL), but not from *F. graminearum* (1.50 x 103 spores/mL) (Fig 2B). 
+![](./figs/figure1.png)
 
-The germination rate ranged from 0 to 100% across the strains. The greatest variability (80% range) was found for the *F. graminearum* strains, followed by F. austroamericanum for which the two strains differed by >70%. Therefore, the effect of genotype was not significant (P = 0.17), but when species-genotype was compared, the mean germination rate of F. meridionale (10.5%) differed significantly from *F. graminearum* (50%) and F. cortaderiae NIV (52.8%).
+**Figure 1.** Relative frequency of perithecial production scores based on a visual ordinal (0-3) scale for the proportion of grains in each score for the three different cereal based substrates (wheat, rice or maize kernels) (A) and the least square means and 95% confidence interval for the perithecial production index which is a normalization of the frequency of the scores (B).
+
+As expected, mean values of mycelial growth rate (MGR) was 84% higher at 30 <sup>o</sup>C (0.7 mm/day) than at 15 <sup>o</sup>C (1.2 mm/day) regardless of the trichothecene genotype. Within each of the temperatures, there were no differences in MGR means among the trichothecene genotypes (*P* > 0.20) as well as between species within trichothecene genotypes (Figure 2A). The variation in MGR was apparently higher within 15-ADON strains compared with the others, especially for the high temperature.
+
+All strains yielded macroconidia and there were differences in conidia production among the genotypes (*P* = 0.057), which were more evident when species-genotypes were compared (*P* < 0.001). The most prolific species was *F. meridionale* (2.18 x 103 spores/mL), which differed significantly from the other species (0.58 to 0.9 x 103 spores/mL), but not from *F. graminearum* (1.50 x 103 spores/mL) (Fig 2B). 
+
+The germination rate ranged from 0 to 100% across the strains. The greatest variability (80% range) was found for the *F. graminearum* strains, followed by F. austroamericanum for which the two strains differed by >70%. Therefore, the effect of genotype was not significant (*P* = 0.17), but when species-genotype was compared, the mean germination rate of F. meridionale (10.5%) differed significantly from *F. graminearum* (50%) and F. cortaderiae NIV (52.8%).
+
+![](./figs/figure2.png)
+
+**Figure 2.** Mycelial growth and spore production by strains of four Fusarium graminearum species complex members possessing a nivalenol (NIV) or an acetylate form of deoxynivalenol (DON) genotype (3-ADON or 15-ADON) assessed based on mycelial growth at 15<sup>o</sup> C or 30<sup>o</sup> C (A), macroconidia production (B) and conidia germination (C).
+
 
 ### Pathogenicity 
 
 FHB severity (proportion of symptomatic spikelets) increased over time and ranged from 10% to 40% in the two cultivars. Regardless of the species, disease progress appeared slower during the first ten days after inoculation (<10%) for the moderately resistant cultivar (BRS Guamirim) compared to the susceptible (BRS 194), for which the progress peaked and stabilized at 15% to 35% after 10 days (Figure 3). No formal test was used to compare these two cultivars because they were evaluated in different experiments. 
+
 Results of the mixed model to test the effect of genotype in the mean area under the severity curve showed the 15-ADON *F. graminearum* (432.1) was significantly higher (P < 0.05) than the 3-ADON- (331.03) and NIV-producing (319.6) species when inoculated in the moderately resistant cultivar, BRS Guamirim. On the other hand, the area under the severity curve in the BRS 194 inoculated with the 3-ADON genotypes (259.8, F. austroamericanum) was significantly higher than the NIV-producing strains (179.4); both not differing from the *F. graminearum* 15-ADON (204.38).
+
+
+![](./figs/figure3.png)
+
+**Figure 3.** Mean (standard deviation) severity of Fusarium head blight (FHB) in a moderately resistant cultivar, BRS Guamirim (A), and a susceptible cultivar, BRS 194 (B), inoculated with strains of different Fusarium graminearum species complex members possessing a nivalenol (NIV) or an acetylate form of deoxynivalenol (DON) genotype (3-ADON or 15-ADON) found associated with FHB in Brazil.
+
 
 ### Tebuconazole sensitivity 
 
-The estimated EC50 values ranged from 0.007 to 1.42 µg/mL across the strains. The highest mean EC50 value was found for one 15-ADON strain (1.42 µg/mL), while for the others the values were < 0.5 µg/mL. Differences among the genotypes were not apparent across the strains and the limited number of samples prevented formal comparison.
+The estimated EC50 values ranged from 0.007 to 1.42 µg/mL across the strains. The highest mean EC50 value was found for one 15-ADON strain (1.42 µg/mL), while for the others the values were < 0.5 µg/mL (Fig. 4). Differences among the genotypes were not apparent across the strains and the limited number of samples prevented formal comparison.
+
+
+![](./figs/figure4.png)
+
+
+Figure 4. The effective concentration of tebuconazole that reduces 50% (EC50) of the mycelial growth of four Fusarium graminearum species complex members possessing a nivalenol (NIV) or an acetylate form of deoxynivalenol (DON) trichothecene genotype (3-ADON or 15-ADON) found associated with Fusarium head blight of wheat in Brazil.
+
 
 
 ## Discussion
@@ -88,7 +155,7 @@ Previously, we found that perithecium-borne *F. meridionale* was highly prevalen
 
 A few other questions remain. It would be instructive to further examine ascospore production and the aerobiology of these species in both controlled and field environment. In our previous field study, *F. meridionale* was the least frequent (<30%) species collected in selective media spore traps during wheat flowering (Del Ponte et al. 2015). Ideally, new studies should include more accurate or less-biased methods, such as molecular identification, given that during isolations, a fast-growing species may outcompete others. In addition, it would be important to monitor ascorporic inoculum over time and space when both species are present in similar frequency, similar to another study that used spore sampler placed near maize stalk residues bearing perithecia with mature ascospores (Manstretta & Rossi 2015). It is well know that FGSC are capable of long distance dispersal (Prussin et al. 2014) and that airborne populations above wheat canopies may be composed of well-mixed inoculum originated under the effect of turbulence and gravitational settling of inoculum from both local and external sources (Del Ponte et al. 2003; Schmale et al. 2006). The latter hypothesis has been suggested based on both aerobiological and spatial patterns studies in Brazil (Del Ponte et al. 2005; Spolti et al. 2015).
 
- There was a large variation among the isolates from a same species-chemotype with regards to the response to the two sub-optimal temperatures tested in our study, thus preventing us from detecting differences in mycelial growth rate at the species or chemotype level. Previous studies have shown a large sensitivity of *F. graminearum* strains to temperature increase, which was indicative of potential for thermal adaptation (Backhouse et al. 2014; Spolti et al. 2014a; Zhan & McDonald, 2011) and saprophytic adaptability (Tunali et al. 2012). In our previous work evaluating mycelial growth rate of only two *F. graminearum* and two F. meridionale strains, growing at four increasing temperatures (10 to 30 oC), significant difference between species was found only at 25 oC and 30 oC, with *F. graminearum* growing faster than *F. meridionale* (Spolti et al. 2012a). Using a sample as low as eight strains, the maximum difference among strains of *F. graminearum* and *F. meridionale* found in this study was ~10 mm/day, which suggests caution when inferring species differences based on small sample. 
+There was a large variation among the isolates from a same species-chemotype with regards to the response to the two sub-optimal temperatures tested in our study, thus preventing us from detecting differences in mycelial growth rate at the species or chemotype level. Previous studies have shown a large sensitivity of *F. graminearum* strains to temperature increase, which was indicative of potential for thermal adaptation (Backhouse et al. 2014; Spolti et al. 2014a; Zhan & McDonald, 2011) and saprophytic adaptability (Tunali et al. 2012). In our previous work evaluating mycelial growth rate of only two *F. graminearum* and two F. meridionale strains, growing at four increasing temperatures (10 to 30 oC), significant difference between species was found only at 25 oC and 30 oC, with *F. graminearum* growing faster than *F. meridionale* (Spolti et al. 2012a). Using a sample as low as eight strains, the maximum difference among strains of *F. graminearum* and *F. meridionale* found in this study was ~10 mm/day, which suggests caution when inferring species differences based on small sample. 
  
 Differences in macroconidia production in culture among species may be suggestive of advantages for further spread by assexual means (Leplat et al. 2013). We found that the variation in this trait was very large among isolates of the same species, especially *F. graminearum* and *F. meridionale*, the most represented species, which prevented us from detecting differences as found in our previous studies using a different set of isolates and smaller sample (Spolti et al. 2012a; Spolti & Del Ponte 2013). Recently, Liu et al. (2017) reported significantly greater macroconidia production by 20 *F. graminearum* 15-ADON strains than 20 *F. asiaticum* NIV strains, but they both did not differ from the F. asiaticum 3-ADON strains. The germination rate also varied considerably among strains of the same species, which makes largely unclear whether macroconidia production is a reliable variable to compare the asexual reproduction fitness among members of the complex given the inconsistencies and high variability. Moreover, in natural epidemics caused by FGSC, the importance of macroconidia inoculum is not clear, although studies highlighted the potential to dispersal and further infection (Paul et al. 2007). 
 
@@ -199,74 +266,11 @@ Ward, T. J., Clear, R.M., Rooney, A.P., O'Donnell, K., Gaba, D., Patrick, S., St
 
 Zhan, J., McDonald, B.A. 2011. Thermal adaptation in the fungal pathogen *Mycosphaerella graminicola*. Mol. Ecol. 20:1689-1701.
 
-Table 1. Information for a collection of 30 strains belonging to four phylogenetic species of the *Fusarium graminearum* species complex isolated from symptomatic wheat heads from fields in Rio Grande do Sul State, Brazil, which were used in five different experiments in this study
 
+## Supplemental material
 
-Code | Location | 	Year  of isolation | 	Species |	Genotype |	Experiment
+![](./supp/figure1s.jpg)
 
-3065	| Panambi	2009	| *F. graminearum* | 	15-ADON	| 2, 3, 4 
-3066	| Ijuí	2009 |	*F. graminearum*	| 15-ADON	| 1,4
-3067	Carazinho	2010	*F. graminearum*	15-ADON	1,2,3,4
-3071	Tapejara	2010	*F. graminearum*	15-ADON	1,2,3,4,5
-3069	Coxilha	2010	*F. graminearum*	15-ADON	1, 2, 4,5
-3070	Santa Bárbara do Sul	2011	*F. graminearum*	15-ADON	1, 2, 4
-3830	Não-Me-Toque	2011	*F. graminearum*	15-ADON	1,2,3
-3833	Não-Me-Toque	2011	*F. graminearum*	15-ADON	1
-3064	Cruz Alta	2007	*F. graminearum*	15-ADON	1,4,5
-3068	Ernestina	2007	*F. graminearum*	15-ADON	1,2,3,4,5
-3382	Caseiros	2010	F. austroamericanum	3-ADON	1,2,3,5
-3384	Barreto	2010	F. austroamericanum	3-ADON	1,2,3,4,5
-3379	Carazinho	2010	F. cortaderiae	3-ADON	1,2,3,4,5
-3845	Lagoa Vermelha	2010	F. cortaderiae	3-ADON	1,2,3,4
-3841	Lagoa Vermelha	2010	F. cortaderiae	3-ADON	1,2,3,4,5
-3831	Panambi	2009	F. cortaderiae	NIV	1,2,3,4,5
-3836	Coronel Barros	2009	F. cortaderiae	NIV	1,2,4
-3837	Coronel Barros	2009	F. cortaderiae	NIV	1,2,3,4,5
-3840	Mato Castelhano	2010	F. cortaderiae	NIV	1,2,4
-3834	Barreto	2010	F. cortaderiae	NIV	1,2,4
-3378	Vacaria	2010	F. cortaderiae	NIV	1,2,3,4,5
-3835	Ernestina	2007	F. cortaderiae	NIV	1,2,3,4
-3375	Santa Bárbara do Sul	2009	F. meridionale	NIV	1,2,4
-3843	Ernestina	2009	F. meridionale	NIV	1,2,3,4
-3344	Coxilha	2009	F. meridionale	NIV	1,2,3,4,5
-3381	Caseiros	2010	F. meridionale	NIV	1,2,3,4,5
-3839	Marau	2011	F. meridionale	NIV	1,2,3,4,5
-3377	Sertão	2011	F. meridionale	NIV	1,2,3,4
-3838	Nonoai	2007	F. meridionale	NIV	1,2,3,4
-3374	Nonoai	2007	F. meridionale	NIV	1,2,4
-
-a Culture collection code: CML = Coleção Micológica de Lavras, Universidade Federal de Lavras, Lavras, Minas Gerais, Brazil.
-b Trichothecene genotype identified by the Luminex method: 15-ADON = 15-acetyl-deoxynivalenol; 3-ADON = 3-acetyl-deoxynivalenol; NIV = nivalenol.
-c Experiments: 1 = Perithecial production; 2 = Mycelial growth; 3 = Sporulation and germination; 4 = Pathogenicity; 5 = Sensitivity to tebuconazole.
-
-
-
- 
-
-Figure 1. Relative frequency of perithecial production scores based on a visual ordinal (0-3) scale for the proportion of grains in each score for the three different cereal based substrates (wheat, rice or maize kernels) (A) and the least square means and 95% confidence interval for the perithecial production index which is a normalization of the frequency of the scores (B).
-
-
-
- 
-Figure 2. Mycelial growth and spore production by strains of four Fusarium graminearum species complex members possessing a nivalenol (NIV) or an acetylate form of deoxynivalenol (DON) genotype (3-ADON or 15-ADON) assessed based on mycelial growth at 15° C or 30° C (A), macroconidia production (B) and conidia germination (C).
-
-
-
-Figure 3. Mean (standard deviation) severity of Fusarium head blight (FHB) in a moderately resistant cultivar, BRS Guamirim (A), and a susceptible cultivar, BRS 194 (B), inoculated with strains of different Fusarium graminearum species complex members possessing a nivalenol (NIV) or an acetylate form of deoxynivalenol (DON) genotype (3-ADON or 15-ADON) found associated with FHB in Brazil.
-
-
- 
-Figure 5. The effective concentration of tebuconazole that reduces 50% (EC50) of the mycelial growth of four Fusarium graminearum species complex members possessing a nivalenol (NIV) or an acetylate form of deoxynivalenol (DON) trichothecene genotype (3-ADON or 15-ADON) found associated with Fusarium head blight of wheat in Brazil.
-
-
-
-Supplemental material
-
-
- 
-
-Figure 1S
-
-Diagrammatic key with four scores representing a percent range for the grain surface covered with perithecia, for rice, maize and wheat substrates. 1 = 0% (no perithecia); 2 = 1 - 10% ; 3 = > 10% - 30%); 4 = > 30%.
+**Figure 1S**. Diagrammatic key with four scores representing a percent range for the grain surface covered with perithecia, for rice, maize and wheat substrates. 1 = 0% (no perithecia); 2 = 1 - 10% ; 3 = > 10% - 30%); 4 = > 30%.
 
 

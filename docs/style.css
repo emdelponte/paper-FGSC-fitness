@@ -2,23 +2,6 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 
 
-body {
-font-family: 'Roboto Condensed', sans-serif;
-margin-left:2px;
-margin-right:2px;
-margin-top: 20px;
-font-size: 19px;
-line-height: 1.5
-}
-
-p {
-line-height:1.6;
-margin-top:10px;
-margin-bottom:30px;
-margin-left:0px;
-margin-right:0px;
-  }
-
 pre {
   border: 0;
   padding: 16px;
@@ -26,26 +9,51 @@ pre {
   font-size:15px;
   margin-bottom:40px;
   color: black;
-  
-  
 }
- 
-h1, h2, h3,h4 { 
-  font-family: 'Oswald', sans-serif;
-  padding-bottom: 10px;
-  padding-top: 20px;
-  color: #0AA460;
- 
-} 
- 
-.navbar-default {
-    background-color: #0AA460;
 
+
+body {
+margin:20px;
+padding:0px;
+width:100%;
+font-size: 1.8em;
+line-height: 170%
 }
-.list-group-item.active {
-    z-index: 2;
-    color: #ffffff;
-    background-color: #0AA460;
-    border-color: #0AA460
+
+img {
+ margin-top: 40px;
+ margin-bottom: 40px
+}
+
+
+
+h1,h2,h3,h4 {
+margin-bottom: 20px;
+margin-top: 30px;
+padding-top: 15px;
+display: inline-block;
+width:100%
+}
+}
+h1.title {
+font-family: 'Oswald', sans-serif;
+font-size: 28px;
+line-height: 100%
+}
+
+pre code, pre, code {
+ margin-top: 30px;
+ margin-bottom: 40px
+ 
+}
+
+
+blockquote {
+text-align: justify;
+margin-top: 20px;
+margin-bottom: 30px;
+font-size: 0.9em;
+line-height:130%;
+background-color: #f2f2f2;
 }
 

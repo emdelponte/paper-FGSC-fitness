@@ -2,15 +2,11 @@
 
 ## Raw data 
 
-<<<<<<< HEAD
+
 The data were obtained from five different (mostly repeated in time) experiments, and were organized in a single `xlsx` file. Data from each experiment are in a separate sheet and were exported to a `csv` file.
 
 The data are already organized in a rectangular (tidy) format, mostly in the long-format (a raw is an observation), but some are in the wide (observations in multiple colums), and so will need some wrangling. This munging is done within the respective section of the data analysis page, after data import. 
-=======
-The data were obtained from five different (mostly repeated in time) experiments, and were organized in a single `xlsx` file. Data from each experiment are in a separate sheet and were exported to single `csv` files.
 
-Most of the data are already organized in a rectangular (tidy) shape and long-format (a raw is an observation). Howver, some are in the wide (observations in multiple colums), and these will require some wrangling. Data munging is done within the respective section of the data analysis page, after data import. 
->>>>>>> origin/master
 
 ## Download 
 
