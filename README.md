@@ -1,6 +1,11 @@
-# Research compendium 
+# About
 
-Research compendium that contains data, R codes and the manuscript file.
+This is a research compendium that contains data, R codes, figures and versions of the manuscript in `html` and `docx` for submission. 
+
+# Manuscript title
+
+Fitness traits of deoxynivalenol and nivalenol-producing *Fusarium graminearum* species complex strains from wheat
+
 
 # Authors of this repository
 
@@ -9,14 +14,15 @@ Emerson Del Ponte (delponte@ufv.br)
 # Overview of contents
 
 - `index.Rmd`: About the research and authorship
-- `data.Rmd`: Contains the raw or raw-derived data.
-- `code.Rmd`: Produces the main analysis report 
-- `manuscript.Rmd`: A pre-print version of the paper. 
+- `data.Rmd`: Raw in both `xlsx` and `csv`.
+- `code.Rmd`: All analyses in a single file
+- `manuscript.Rmd`: A pre-print html version of the paper. 
 
 There are three basic folders:
 
-- `data/` - raw and further processed data.
+- `data/` - Raw data.
 - `docs/` - html files of the research compendia with all text and figures.
+- `figs/` - Figures ready for the publication.
 - `supp/` - supplementary files that are not data or R codes.
 
 
