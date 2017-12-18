@@ -12,6 +12,6 @@ The data are already organized in a rectangular (tidy) format, mostly in the lon
 
 The data are stored in the `data` folder of the GitHub repository.
 
-https://github.com/phytopathology/paper-FGSC-fitness/data
+https://github.com/phytopathology/paper-FGSC-fitness/tree/master/data
 
 

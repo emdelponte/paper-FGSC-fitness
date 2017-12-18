@@ -23,8 +23,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -36,10 +36,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -72,7 +74,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="style.css" />
 
 </head>
 
@@ -334,12 +336,13 @@ div.tocify {
 </div>
 
 
-<p><img src = "https://www.apsnet.org/edcenter/intropp/lessons/fungi/ascomycetes/PublishingImages/Fusariumdiscyclesm.jpg" align= right width = 250> This is a research compendium that contains and describe the data and the R codes for analyzing and visualizing these data obtained from a series of experiments conducted as an MSc research in the Del Ponte lab. The main research’s objective was to assess and compare members of a species complex (FGSC), with varying toxigenic potential, that cause <a href="https://www.apsnet.org/edcenter/intropp/lessons/fungi/ascomycetes/Pages/Fusarium.aspx">Fusarium head blight or scab</a>, an important disease of wheat and barley worldwide. Several fitness-related traits were compared in five experiments conducted both <em>in vitro</em> and in <em>planta</em>. Check the manuscript page.</p>
-<div id="summary-of-methods" class="section level2">
+<p><img src = "https://www.apsnet.org/edcenter/intropp/lessons/fungi/ascomycetes/PublishingImages/Fusariumdiscyclesm.jpg" align= right width = 270> This research compendium contains the data and the commented R codes for analyzing and visualizing these data obtained from a series of experiments conducted as an MSc research in the Del Ponte lab.</p>
+<p>The main objective was to assess and compare members of a species complex (FGSC), with varying toxigenic potential, which cause <a href="https://www.apsnet.org/edcenter/intropp/lessons/fungi/ascomycetes/Pages/Fusarium.aspx">Fusarium head blight (FHB) or scab</a>. FHB is an important disease of wheat and barley worldwide. Several fitness-related traits were compared in five experiments conducted both <em>in vitro</em> and in <em>planta</em>. Check the manuscript page.</p>
+<section id="summary-of-methods" class="level2">
 <h2>Summary of methods</h2>
 <p>A collection of 30 strains was obtained from the laboratory’s FGSC collection and experiments were designed to measure traits related with asexual and sexual fungal growth, pathogenicity towards two wheat cultivars of varying susceptibility and sensitivity to tebuconazole fungicide. In most analyses, we were interested in testing the effect of species or toxing genotypes, and not the effect of individual isolates. Therefore, the isolates were treated as random sample representative of the population of strains. We used a mixed modeling approach where isolates were treated as random effects. Data from each experiment were analyzed separately.</p>
-</div>
-<div id="project-team" class="section level2">
+</section>
+<section id="project-team" class="level2">
 <h2>Project team</h2>
 <p>Project PI:</p>
 <ul>
@@ -352,19 +355,19 @@ div.tocify {
 <li>Piérri Spolti, Postdoctoral felow</li>
 <li>Franklin Machado, DSc student</li>
 </ul>
-</div>
-<div id="citation" class="section level2">
+</section>
+<section id="citation" class="level2">
 <h2>Citation</h2>
 <p>Please cite this research compendium as:</p>
 <blockquote>
 <p>Del Ponte EM. Fitness-related traits of Fusarium graminearum species complex: a research compendia. Online at <a href="https://phytopathology.github.io/paper-FGSC-fitness/" class="uri">https://phytopathology.github.io/paper-FGSC-fitness/</a></p>
 </blockquote>
-</div>
-<div id="licences" class="section level2">
+</section>
+<section id="licences" class="level2">
 <h2>Licences</h2>
 <p>Data: <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC-0</a> attribution requested in reuse Manuscript: <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a><br />
 Code: <a href="https://opensource.org/licenses/MIT">MIT</a> year: 2017, copyright holder: Emerson Del Ponte</p>
-</div>
+</section>
 
 
 

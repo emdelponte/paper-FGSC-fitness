@@ -23,8 +23,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -36,10 +36,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -72,7 +74,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="style.css" />
 
 </head>
 
@@ -334,16 +336,16 @@ div.tocify {
 </div>
 
 
-<div id="raw-data" class="section level2">
+<section id="raw-data" class="level2">
 <h2>Raw data</h2>
 <p>The data were obtained from five different (mostly repeated in time) experiments, and were organized in a single <code>xlsx</code> file. Data from each experiment are in a separate sheet and were exported to a <code>csv</code> file.</p>
 <p>The data are already organized in a rectangular (tidy) format, mostly in the long-format (a raw is an observation), but some are in the wide (observations in multiple colums), and so will need some wrangling. This munging is done within the respective section of the data analysis page, after data import.</p>
-</div>
-<div id="download" class="section level2">
+</section>
+<section id="download" class="level2">
 <h2>Download</h2>
 <p>The data are stored in the <code>data</code> folder of the GitHub repository.</p>
-<p><a href="https://github.com/phytopathology/paper-FGSC-fitness/data" class="uri">https://github.com/phytopathology/paper-FGSC-fitness/data</a></p>
-</div>
+<p><a href="https://github.com/phytopathology/paper-FGSC-fitness/tree/master/data" class="uri">https://github.com/phytopathology/paper-FGSC-fitness/tree/master/data</a></p>
+</section>
 
 
 

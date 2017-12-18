@@ -1,6 +1,8 @@
 % About
 
-<img src = "https://www.apsnet.org/edcenter/intropp/lessons/fungi/ascomycetes/PublishingImages/Fusariumdiscyclesm.jpg" align= right width = 250> This is a research compendium that contains and describe the data and the R codes for analyzing and visualizing these data obtained from a series of experiments conducted as an MSc research in the Del Ponte lab. The main research's objective was to assess and compare members of a species complex (FGSC), with varying toxigenic potential, that cause [Fusarium head blight or scab](https://www.apsnet.org/edcenter/intropp/lessons/fungi/ascomycetes/Pages/Fusarium.aspx), an important disease of wheat and barley worldwide. Several fitness-related traits were compared in five experiments conducted both *in vitro* and in *planta*. Check the manuscript page.
+<img src = "https://www.apsnet.org/edcenter/intropp/lessons/fungi/ascomycetes/PublishingImages/Fusariumdiscyclesm.jpg" align= right width = 270> This research compendium  contains the data and the commented R codes for analyzing and visualizing these data obtained from a series of experiments conducted as an MSc research in the Del Ponte lab. 
+
+The main objective was to assess and compare members of a species complex (FGSC), with varying toxigenic potential, which cause [Fusarium head blight (FHB) or scab](https://www.apsnet.org/edcenter/intropp/lessons/fungi/ascomycetes/Pages/Fusarium.aspx). FHB is an important disease of wheat and barley worldwide. Several fitness-related traits were compared in five experiments conducted both *in vitro* and in *planta*. Check the manuscript page.
 
 
 ## Summary of methods

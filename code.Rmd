@@ -1,10 +1,10 @@
-% Code
+% Analysis code
 
 ## Introduction
 
-The data com from a series of different experiments. There is one single `xlsx` file with each experiment in a single sheet. Follows the commented code used for these analyses separated per experiment.
+The data were obtained from a series of randomized replicated experiments. There is one single `csv` file that contains data from each experiment. All analyses are presented below and separated for each experiment. I follow the steps (not in that exactly order) ilustrated in the R for Data Science book (http://r4ds.had.co.nz/) (Grolemund and Wickham 2017). These are: data import and tidy, explore (transform, visualize and model) and communicate.
 
-## Load packages
+These are the packages used.
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 library(tidyverse)
@@ -26,7 +26,7 @@ library(scales)
 
 ### Import 
 
-Let's first import the data and have a look at the raw data.
+Let's have a look at the raw data. 
 
 ```{r message=FALSE, warning=FALSE}
 perithecia <- read_csv(here("data", "perithecia.csv")) %>%
@@ -35,9 +35,11 @@ perithecia <- read_csv(here("data", "perithecia.csv")) %>%
 perithecia
 ```
 
+The main response variable is ppi (perithecia production index), which was already calculated (it is an index based on the frequency of the scores). However, the original scores are included and consist of the number of grains on each score (0 to 3). 
+
 ### Transform
 
-The data were prepared in the wide format where each score for percent perithecia coverage (0 -3) is in a separate column. Let's transform this dataframe from the wide to the long format using `gather` function of `dplyr`. We need to create a column for the variable name and another for the score. 
+The frequecy of each score is shown in separate columns. To plot and further work with the data, we will need to format the data from the wide to the long format, where each frequency of the scores need to be in a single colum. We will use the `gather` function of `dplyr`. For this, we need to inform the name of columns for the score and the frequency. 
 
 ```{r}
 perithecia2 <- perithecia %>%
@@ -49,7 +51,7 @@ perithecia2
 
 ### Visualize
 
-Let's visualize the frequency of the scores for each species-genotype separated for each substrate. This is a nice plot to show in the paper!
+We now can visualize the frequency of the scores for each species-genotype separated (facet) for each substrate. This is a nice plot to have in the paper!
 
 
 ```{r}
@@ -66,7 +68,7 @@ g1
 
 ### Model
 
-Since we have one species which has two genotypes, it may be important, besides testing the effect of species or genotype in the model, to create a species*genotype interaction variable and fit a mixed model to test the effect of this variable on the perithecial production index (ppi). This way the two genotypes within one species can be compared between them and with the others.
+Since we have one species with two genotypes, it may be important, besides testing the effect of species or genotype in the model, to create a species_genotype variable. We will then fit a mixed model to test the effect species_genotype on the perithecial production index (ppi). In this way the two genotypes within one species can be compared between them and with the others. We use the `unite` function.
 
 ```{r}
 # creating the variable
@@ -74,35 +76,38 @@ perithecia <- perithecia %>%
   unite(species_genotype, species, genotype, sep = "_", remove = F)
 ```
 
-Now we fit the model using `lmer` function. We treat `Isolate` as a random effects.
+Now we fit the mixed model using `lmer` function. We treat `Isolate` as a random effects.
 
 ```{r message=FALSE, warning=FALSE, paged.print=FALSE}
-glmm_per <- lmer(
+library(lme4)
+lmm_per <- lmer(
   ppi ~ species_genotype * substrate + (1 | Isolate),
   data = perithecia, REML = FALSE
 )
 ```
 
-Let's check the single and interaction effects.
+Let's check the single and interaction effects using `Anova` function of the `car` package.
 
 ```{r message=FALSE, warning=FALSE}
-Anova(glmm_per)
+library(car)
+Anova(lmm_per)
 ```
 
 Evaluate the model
 
 ```{r}
-plot(glmm_per, type = c("p", "smooth"))
-qqmath(glmm_per, id = 0.05)
+plot(lmm_per, type = c("p", "smooth"))
+qqmath(lmm_per, id = 0.05)
 ```
 
 
 #### Means comparison
 
-Not too bad. Let's now compare the means of treatments and create a dataframe which will be use to further create a plot with the estimated means and confidence interval. We used the `emmeans` package which is an update for the old `lsmeans` package. The syntax is the same as before. 
+Not too bad. Let's now compare the means of treatments and create a dataframe which will be use to further create a plot with the estimated means and confidence interval. We will use the `emmeans` package which is an update for the old `lsmeans` package. The syntax is the same as before. 
 
 ```{r message=FALSE, warning=FALSE}
-medias <- emmeans(glmm_per, ~ species_genotype * substrate)
+library(emmeans)
+medias <- emmeans(lmm_per, ~ species_genotype * substrate)
 med <- cld(medias, Letters = LETTERS, alpha = .05)
 
 # make output as a dataframe
@@ -112,7 +117,7 @@ head(med)
 
 ### Figures 
 
-This new `med` dataframe does not contain the two original variables we want to use to plot the data. Let's separate the `species_genotype` variable and create `genotype` and `species`.
+This new `med` dataframe does not contain the two original variables we want to use to plot the data. Let's separate the `species_genotype` variable and create `genotype` and `species`. We use the `separate` function.
 
 ```{r}
 med2 <- med %>%
@@ -121,7 +126,7 @@ med2 <- med %>%
 head(med2)
 ```
   
-We now produce the plot with point estimate for the means and error bars for the 95%CI of the `ppi` for each `genotype`. We add `species` to the legend when using `color` argument.
+We now can plot the point estimates for the means and respective 95%CI of the `ppi` for each `genotype`. We add `species` legends when using `color` argument so we can have five species_genotype.
   
 ```{r message=FALSE, warning=FALSE}
 g2 <- med2 %>%
@@ -151,7 +156,7 @@ grid1
 
 ### Import 
 
-There is one `csv` file with data from a single experiment. We will use `read_csv` to impor the data.
+The main variable is mycelia growth rate, or the ratio of the growth at the fifth day and number of days. Besides the species and genotype factors, there are two levels of temperatures being tested. 
 
 ```{r message=FALSE, warning=FALSE}
 
@@ -162,7 +167,7 @@ head(mgr)
 
 ### Visualize
 
-We will now produce the plot with the means of mycelial growth rate for each species-genotype and temperature. This will be the final plot for publication.
+We can plot means of mycelial growth rate for each species-genotype and temperature as facetting variable. This plot will be included in the publication.
 
 ```{r message=FALSE, warning=FALSE}
 mgr1 <- mgr %>%
@@ -195,8 +200,7 @@ lmer_mgr <- lmer(mgr ~ species_genotype * temperature + (1 | species_genotype / 
 Anova(lmer_mgr)
 ```
 
-
-We now create different datasets for each temperature and test the effect of `species_genotype` within each temperature.
+The interaction was significant. We now create different datasets for each temperature and test the effect of `species_genotype` within each temperature.
 
 ```{r}
 # 15 C
@@ -218,9 +222,9 @@ Anova(lmer_mgr30)
 
 We can see that there are no effect of `species_genotype` in the `mgr` within each of the temperatures.
 
-## Sporoulation & Germination
+## Sporulation & Germination
 
-In this experiment, the production of macroconidia and further germination of 20 randomly selected spores of the different strains of the species-genotype combination, were evaluated in two runs of the experiment.
+In this experiment, the production of macroconidia and further germination of 20 randomly selected spores of the different strains of the species-genotype combination, was evaluated in two runs of the experiment.
 
 ### Import 
 
@@ -271,26 +275,38 @@ germ <- germ1 %>%
 
 ### Model
 
-
-Anova model
+Mixed model for testing the effect of genotype.
 
 ```{r message=FALSE, warning=FALSE}
-lmer_spor <- lmer(spores_ml ~ species_genotype + (1 | species_genotype), data = spor, REML = FALSE)
-Anova(lmer_spor)
-plot(lmer_spor, type = c("p", "smooth"))
-qqmath(lmer_spor, id = 0.05)
+lmer_spor <- lmer(spores_ml ~ genotype + (1 | genotype / isolate), data = spor, REML = FALSE)
+
 ```
+
+```{r}
+plot(lmer_spor, type = c("p", "smooth"), col = "black")
+qqmath(lmer_spor, id = 0.05, col = "black")
+```
+
+Model fitted well the data. Let's proceed.
+
+```{r}
+Anova(lmer_spor)
+```
+
+
 
 #### Means comparison
 
 ```{r}
-medias <- emmeans(lmer_spor, ~species_genotype)
+medias <- emmeans(lmer_spor, ~genotype)
 med <- cld(medias, Letters = LETTERS, alpha = .05)
 med <- data.frame(med)
 med
 ```
 
 ### Figure 2
+
+We will produce a combo figure for the three variables.
 
 ```{r message=FALSE, warning=FALSE}
 grid1 <- plot_grid(spor2, germ, labels = c("B", "C"), ncol = 2, align = "hv")
@@ -301,28 +317,30 @@ ggsave(here("figs", "figure2.png"), grid5, width = 6, height = 6.2)
 grid5
 ```
 
-## Pathogenicity tests
+## Pathogenicity 
+
+The pathogenicity was assessed based on the progress of the symptoms from the central (inoculated) spikelet. The data was transformed to percent severity of the spike (proportion of diseased spikelets). There is one obsevation of severity for each day after inoculation (dai) and individual spike.
+
 
 ### Import 
 
-
 ```{r message=FALSE, warning=FALSE}
 pathogen <- read_csv(here("data", "pathogenicity.csv")) %>%
-  filter(isolate != "test")
+  filter(isolate != "test") %>% 
+  select (-c(8:12))
+
+pathogen
 ```
 
 ### Transform 
 
-Let's prepare several summary statistics for the disease variables per cultivar. We will calculate the mean and standard deviation of proportion of diseased spikelets.
+Since we have spikes as replicates, we will calculate the mean and standard deviation of severity for plotting purposes.  
 
 ```{r}
 # preparing cultivar 194
 
 pathogen_194 <- pathogen %>%
   filter(cultivar == "BRS 194") %>%
-  select(1:7, 9, 11, 12, 13) %>%
-  gather(position, count, 8:9) %>%
-  # filter(exp == 2) %>%
   group_by(cultivar, dai, genotype, species) %>%
   summarize(
     mean_sev = mean(sev),
@@ -333,10 +351,8 @@ pathogen_194 <- pathogen %>%
 
 pathogen_Gua <- pathogen %>%
   filter(cultivar == "BRS Guamirim") %>%
-  select(1:7, 9, 11:13) %>%
-  gather(position, count, 8:9) %>%
-  # filter(exp == 2) %>%
-  group_by(cultivar, dai, genotype, species, position) %>%
+   # filter(exp == 2) %>%
+  group_by(cultivar, dai, genotype, species) %>%
   summarize(
     mean_sev = mean(sev),
     sd_sev = sd(sev)
@@ -395,7 +411,9 @@ fig3
 
 ### Visualize AUDPC
 
-Let's calculate the area under the curve for each isolate. For this, we will use the `audpc` function of the `agricolae` package. First, we need to group several variables up to `dai` (days after inoculation). To make our life easier, lets use the `do` in conjuction with the `tidy` functions of the `dplyr` and `broom` package, respectively. This will calculate the audpce for each spike.
+Let's calculate the area under the curve for each isolate. For this, we will use the `audpc` function of the `agricolae` package. First, we need to group several variables up to `dai` (days after inoculation). To make our life easier, lets use the `do` in conjuction with the `tidy` functions of the `dplyr` and `broom` package, respectively. This will calculate the audpc for each spike.
+
+#### BRS 194
 
 ```{r}
 audpc_194 <- pathogen %>%
@@ -413,6 +431,24 @@ names(audpc_194)[8] <- "audpc"
 ```
 
 
+Now we can plot the means and standard deviation for each isolate.
+
+```{r}
+audpc_194 %>%
+  group_by(isolate, species, genotype) %>%
+  summarize(
+    mean_audpc = mean(audpc),
+    sd_audpc = sd(audpc)
+  ) %>%
+  ggplot(aes(reorder(isolate, mean_audpc), mean_audpc, color = genotype, shape = species)) +
+  coord_flip() +
+  theme_few() +
+  geom_point(position = position_dodge(width = 0.4)) +
+  geom_errorbar(aes(min = mean_audpc - sd_audpc, max = mean_audpc + sd_audpc), position = position_dodge(width = 0.4), width = 0.2)
+```
+
+#### BRS Guamirim
+
 ```{r}
 audpc_gua <- pathogen %>%
   filter(cultivar == "BRS Guamirim") %>%
@@ -429,122 +465,134 @@ names(audpc_gua)[8] <- "audpc"
 ```
 
 
-```{r}
-audpc_194 %>%
-  group_by(species, genotype) %>%
-  summarize(
-    mean_audpc = mean(audpc),
-    sd_audpc = sd(audpc)
-  ) %>%
-  ggplot(aes(species, mean_audpc, color = genotype)) +
-  coord_flip() +
-  theme_few() +
-  geom_point(position = position_dodge(width = 0.4)) +
-  geom_errorbar(aes(min = mean_audpc - sd_audpc, max = mean_audpc + sd_audpc), position = position_dodge(width = 0.4), width = 0.2)
-```
+Now we can plot the means and standard deviation for each isolate.
 
 
 
 ```{r}
 audpc_gua %>%
-  group_by(species, genotype) %>%
+  group_by(isolate, species, genotype) %>%
   summarize(
     mean_audpc = mean(audpc),
     sd_audpc = sd(audpc)
   ) %>%
-  ggplot(aes(species, mean_audpc, color = genotype)) +
+  ggplot(aes(reorder(isolate, mean_audpc), mean_audpc, color = genotype, shape = species)) +
   coord_flip() +
   theme_few() +
   geom_point(position = position_dodge(width = 0.4)) +
   geom_errorbar(aes(min = mean_audpc - sd_audpc, max = mean_audpc + sd_audpc), position = position_dodge(width = 0.4), width = 0.2)
 ```
 
-### Model
+
+### Mixed model
+
+We fit a separate model for each cultivar because the experiments were conducted at different times. We fit a multilevel to test the effect of specis_genotype as fixed effects and spikes nested within isolates as random effects. The species_genotype interaction was non-significant (not shown), and then a simpler model is used.
 
 #### BRS Guamirim
 
 ```{r}
-
 mix_gua <- lmer(
-  audpc ~ genotype +
-    (1 | exp / spike),
-  data = audpc_gua, REML = FALSE
-)
+  audpc ~ species_genotype  +
+    (1 | isolate/spike),
+  data = audpc_gua, REML = FALSE)
+
+mix_gua
+
 ```
 
 Evaluate the model
 
 ```{r message=FALSE, warning=FALSE}
-
 plot(mix_gua, type = c("p", "smooth"), col = "black")
 qqmath(mix_gua, id = 0.05, col = "black")
 ```
 
-
+The model seems OK. Let's check the significance of the species_genotype and estimated means.
 
 ```{r}
 Anova(mix_gua)
-
-means <- emmeans(mix_gua, ~ genotype)
+means <- emmeans(mix_gua, ~ species_genotype)
 cld(means)
 ```
 
+We can see that the variation among isolates was too large and so no difference could be detected among the five species_genotype in the moderate resistant cultivar.
+
+
+#### BRS 194
+
+We now apply the same model for the susceptible cultivar.
 
 ```{r}
-mix_194 <- lmer(log(audpc) ~ genotype + (1 | exp / spike), data = audpc_194, REML = FALSE)
+mix_194 <- lmer(audpc ~ species_genotype + 
+                  (1 | isolate/spike), 
+                data = audpc_194)
+mix_194
 ```
 
 
-Evaluate the model
+Evaluate the model.
 
 ```{r}
-
 plot(mix_194, type = c("p", "smooth"), col = "black")
 qqmath(mix_194, id = 0.05, col = "black")
 ```
 
 
-#### BRS 194
+Note: I used both the original and the log-transformed `audpc` and the results were the same. Hence, I kept the original data.
+
+
 
 ```{r}
 Anova(mix_194)
-means <- emmeans(mix_194, ~ genotype)
+means <- emmeans(mix_194, ~ species_genotype)
 cld(means)
 ```
 
+Again, the effect of species_genotype was not significant due to large variation among isolates.
+
+
+
 ## Fungicide sensitivity
+
+The response variable is the EC50 estimated in two experiments (true replicates) for each selected isolate from each species_genotype.
 
 ### Import
 
 ```{r message=FALSE, warning=FALSE}
 ec50 <- read_csv(here("data", "ec50.csv"))
+ec50
 ```
 
 ### Summarize
 
-```{r}
+Let's obtain the mean and standard deviation of ec50 for each strain.
+
+```{r message=FALSE, warning=FALSE}
 ec502 <- ec50 %>%
-  group_by(isolate, species, genotype) %>%
+   unite(species_genotype, species, genotype, sep = "_", remove = F) %>% 
+  group_by(isolate, species, genotype, species_genotype) %>%
   summarize(
     mean_ec50 = mean(ec50),
     sd_ec50 = sd(ec50)
   )
+ec502
 ```
 
 ### Visualize
 
-Let's have a look at the mean EC50 for the isolates
+Let's have a look at the mean EC50 for each isolate.
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 ec502 %>%
-  ggplot(aes(genotype, mean_ec50, color = species)) +
-  geom_jitter(width = 0.1) +
-  # geom_errorbar(aes(min = mean_ec50 - sd_ec50, max = mean_ec50 + sd_ec50), width=0.2, position = position_dodge(width = 0.2))+
+  ggplot(aes(reorder(isolate, mean_ec50), mean_ec50, shape = species, color = genotype)) +
+  geom_point() +
+  geom_errorbar(aes(min = mean_ec50 - sd_ec50, max = mean_ec50 + sd_ec50), width = 0.2)+
   theme_few() +
+  coord_flip()+
   theme(legend.position = "right", legend.text = element_text(size = 7, face = "italic")) +
   ylim(0, 1.8) +
   scale_color_viridis(discrete = TRUE) +
-  labs(y = (expression(paste("EC"[50], " (", mu, "g/ml)"))), x = "Trichothecene genotype", color = "Species") +
+  labs(y = (expression(paste("EC"[50], " (", mu, "g/ml)"))), x = "FGSC strain", shape = "Species", color = "Genotype" ) +
   ggsave(here("figs", "ec50-new.png"), width = 4.5, height = 3)
 ```
 
