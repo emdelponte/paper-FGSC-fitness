@@ -1,3 +1,3 @@
-
-
-Copyright 2017 Emerson Del Ponte
+<br><br>
+<hr>
+Developed by Emerson Del Ponte.

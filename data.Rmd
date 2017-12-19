@@ -11,7 +11,9 @@ The data are already organized in a rectangular (tidy) format, mostly in the lon
 ## Download 
 
 The data are stored in the `data` folder of the GitHub repository.
-
 https://github.com/phytopathology/paper-FGSC-fitness/tree/master/data
 
+It is also publicly availabe at the Open Science Framerwork  
+Identifiers: DOI 10.17605/OSF.IO/C2MBR | ARK c7605/osf.io/c2mbr  
+https://osf.io/c2mbr/ 
 

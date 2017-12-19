@@ -5,7 +5,7 @@ csl: plant-disease.csl
 bibliography: crossref.bib
 output: 
   word_document:
-    reference_docx: manuscript.docx
+    reference_docx: docs/manuscript.docx
 ---
 
 
