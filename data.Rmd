@@ -3,17 +3,14 @@
 ## Raw data 
 
 
-The data were obtained from five different (mostly repeated in time) experiments, and were organized in a single `xlsx` file. Data from each experiment are in a separate sheet and were exported to a `csv` file.
-
-The data are already organized in a rectangular (tidy) format, mostly in the long-format (a raw is an observation), but some are in the wide (observations in multiple colums), and so will need some wrangling. This munging is done within the respective section of the data analysis page, after data import. 
+The data for this study were obtained from five different (mostly repeated in time) experiments, and were organized in a single `xlsx` file. Data from each experiment are in a separate sheet and were exported to a `csv` file. They are already organized in a rectangular (tidy) format, mostly in the long-format (a raw is an observation). For some experiments, they are in the wide format (observations in multiple colums), and so will need some wrangling. This munging is done within the respective section of the data analysis page, after data import. 
 
 
 ## Download 
 
-The data are stored in the `data` folder of the GitHub repository.
-https://github.com/phytopathology/paper-FGSC-fitness/tree/master/data
+> The data are stored in the following repositories:
 
-It is also publicly availabe at the Open Science Framerwork  
-Identifiers: DOI 10.17605/OSF.IO/C2MBR | ARK c7605/osf.io/c2mbr  
+https://github.com/phytopathology/paper-FGSC-fitness/tree/master/dat  
 https://osf.io/c2mbr/ 
+Identifier: DOI 10.17605/OSF.IO/C2MBR 
 

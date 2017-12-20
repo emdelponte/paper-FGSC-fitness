@@ -4,10 +4,10 @@
 
 pre {
   border: 0;
-  padding: 16px;
+  padding: 10px;
   background-color: #f8f8f8;
   font-size:15px;
-  margin-bottom:40px;
+  margin-bottom:20px;
   color: black;
 }
 
@@ -26,10 +26,9 @@ img {
 }
 
 
-
 h1,h2,h3,h4 {
 margin-bottom: 20px;
-margin-top: 30px;
+margin-top: 20px;
 padding-top: 15px;
 display: inline-block;
 width:100%;
@@ -38,7 +37,7 @@ font-family: 'Oswald', sans-serif;
 
 h1.title {
 font-family: 'Oswald', sans-serif;
-font-size: 28px;
+font-size: 30px;
 line-height: 100%
 }
 
@@ -48,10 +47,9 @@ pre code, pre, code {
  
 }
 
-
 blockquote {
 text-align: justify;
-margin-top: 20px;
+margin-top: 10px;
 margin-bottom: 30px;
 font-size: 1em;
 line-height:130%;

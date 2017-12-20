@@ -96,8 +96,8 @@ Anova(lmm_per)
 Evaluate the model
 
 ```{r}
-plot(lmm_per, type = c("p", "smooth"))
-qqmath(lmm_per, id = 0.05)
+plot(lmm_per, type = c("p", "smooth"), col = "black")
+qqmath(lmm_per, id = 0.05, col = "black")
 ```
 
 
